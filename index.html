@@ -219,6 +219,21 @@
             color: var(--accent);
         }
 
+        .hero-byline {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-top: -0.75rem;
+            margin-bottom: 1.75rem;
+            opacity: 0;
+            animation: fadeUp 0.6s ease 0.25s forwards;
+        }
+
+        .hero-byline::before {
+            content: "— ";
+            color: var(--accent);
+        }
+
         .hero-sub {
             font-size: 1.25rem;
             color: var(--text-secondary);
@@ -723,6 +738,7 @@
 <section class="hero" id="hero">
     <p class="hero-greeting">// 30+ years of shipping software</p>
     <h1>I build what others<br><span class="accent">spec out.</span></h1>
+    <p class="hero-byline">Mathieu-Philippe Bourgeois</p>
     <p class="hero-sub">Fractional CTO, AI engineer, and full-stack architect. I turn ambitious ideas into production systems — fast.</p>
     <div class="hero-cta">
         <a href="#contact" class="btn btn-primary">Get in touch</a>
