@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mathieu-Philippe Bourgeois — Fractional CTO &amp; AI Engineer</title>
-    <meta name="description" content="Senior software architect, AI engineer, and fractional CTO with 20+ years of experience. I build what others spec out.">
+    <meta name="description" content="Senior software architect, AI engineer, and fractional CTO with 30+ years of experience. I build what others spec out.">
     <meta name="author" content="Mathieu-Philippe Bourgeois">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Mathieu-Philippe Bourgeois — Fractional CTO & AI Engineer">
-    <meta property="og:description" content="Senior software architect, AI engineer, and fractional CTO with 20+ years of experience building production systems.">
+    <meta property="og:description" content="Senior software architect, AI engineer, and fractional CTO with 30+ years of experience building production systems.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://matpb.com">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mathieu-Philippe Bourgeois — Fractional CTO & AI Engineer">
-    <meta name="twitter:description" content="Senior software architect, AI engineer, and fractional CTO with 20+ years of experience.">
+    <meta name="twitter:description" content="Senior software architect, AI engineer, and fractional CTO with 30+ years of experience.">
 
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -26,7 +26,7 @@
         "name": "Mathieu-Philippe Bourgeois",
         "url": "https://matpb.com",
         "jobTitle": "Fractional CTO & AI Engineer",
-        "knowsAbout": ["Artificial Intelligence", "Software Architecture", "Full-Stack Development", "Machine Learning", "Cloud Infrastructure"],
+        "knowsAbout": ["Artificial Intelligence", "Software Architecture", "Full-Stack Development", "Machine Learning", "Cloud Infrastructure", "Blockchain", "Web3"],
         "sameAs": [
             "https://github.com/matpb",
             "https://linkedin.com/in/matpb"
@@ -69,6 +69,42 @@
             color: var(--text-primary);
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
+        }
+
+        /* Subtle background texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+            pointer-events: none;
+        }
+
+        /* Soft radial glow behind hero */
+        body::after {
+            content: '';
+            position: fixed;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(200, 164, 78, 0.06) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+            animation: glowPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
         }
 
         /* Nav */
@@ -400,6 +436,57 @@
             transform: translateX(4px);
         }
 
+        /* Open Source */
+        .opensource {
+            padding-bottom: 8rem;
+        }
+
+        .opensource-intro {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        .opensource-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .opensource-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.25s;
+        }
+
+        .opensource-card:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .opensource-icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .opensource-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .opensource-card p {
+            color: var(--text-secondary);
+            font-size: 0.925rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
         /* Testimonials */
         .testimonials {
             padding-bottom: 8rem;
@@ -594,6 +681,7 @@
 
             .about-grid,
             .expertise-grid,
+            .opensource-grid,
             .testimonial-grid {
                 grid-template-columns: 1fr;
             }
@@ -624,6 +712,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#expertise">Expertise</a></li>
             <li><a href="#work">Work</a></li>
+            <li><a href="#opensource">Open Source</a></li>
             <li><a href="#testimonials">Testimonials</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -632,7 +721,7 @@
 
 <!-- Hero -->
 <section class="hero" id="hero">
-    <p class="hero-greeting">// 20+ years of shipping software</p>
+    <p class="hero-greeting">// 30+ years of shipping software</p>
     <h1>I build what others<br><span class="accent">spec out.</span></h1>
     <p class="hero-sub">Fractional CTO, AI engineer, and full-stack architect. I turn ambitious ideas into production systems — fast.</p>
     <div class="hero-cta">
@@ -646,14 +735,14 @@
     <div class="about-grid">
         <div class="about-text fade-in">
             <p class="section-label">About</p>
-            <h2 class="section-title">Self-taught at 13.<br>Still shipping at 33.</h2>
-            <p>I've spent two decades building software — from consulting for 3,000+ Mac clients as a teenager, to co-founding a development agency, to leading engineering as CIO and CTO at venture-backed companies.</p>
-            <p>Today, I work as a senior backend and AI engineer while running my own products on the side. I specialize in the kind of problems that sit at the intersection of architecture, artificial intelligence, and getting things done.</p>
+            <h2 class="section-title">Self-taught at 13.<br>Still shipping at 45.</h2>
+            <p>I've spent three decades building software — from consulting for 3,000+ Mac clients as a teenager, to co-founding a development agency, to leading engineering as CIO and CTO at venture-backed companies.</p>
+            <p>Today, I work as a senior backend and AI engineer while running my own products on the side. I specialize in the kind of problems that sit at the intersection of architecture, artificial intelligence, blockchain, and getting things done.</p>
             <p>I don't do PowerPoints. I ship code.</p>
         </div>
         <div class="about-stats fade-in">
             <div class="stat-card">
-                <div class="stat-number">20+</div>
+                <div class="stat-number">30+</div>
                 <div class="stat-label">Years of experience</div>
             </div>
             <div class="stat-card">
@@ -684,8 +773,8 @@
         </div>
         <div class="expertise-card fade-in">
             <span class="expertise-icon">&#9671;</span>
-            <h3>AI Engineering</h3>
-            <p>From LLM integrations and agent systems to custom ML pipelines. I build AI that works in production — not just in demos.</p>
+            <h3>AI Engineering &amp; Consulting</h3>
+            <p>From LLM integrations and agent systems to custom ML pipelines. I've trained engineering teams, brought companies into the AI era, and automated everything from front-desk call centers to full marketing pipelines.</p>
         </div>
         <div class="expertise-card fade-in">
             <span class="expertise-icon">&#9674;</span>
@@ -697,13 +786,18 @@
             <h3>Product Development</h3>
             <p>I don't just write code — I ship products. From concept to App Store, from MVP to scale. Strategy, execution, and everything it takes to get to market.</p>
         </div>
+        <div class="expertise-card fade-in">
+            <span class="expertise-icon">&#9830;</span>
+            <h3>Blockchain &amp; Web3</h3>
+            <p>Certified Cosmos developer with years of blockchain engineering for private clients. Smart contracts, custom chains, tokenomics, and decentralized infrastructure that actually ships.</p>
+        </div>
     </div>
 </section>
 
 <!-- Work -->
 <section class="work" id="work">
     <p class="section-label fade-in">Selected Work</p>
-    <h2 class="section-title fade-in">Things I've built.</h2>
+    <h2 class="section-title fade-in">Things I've engineered.</h2>
     <div class="work-grid">
         <a href="https://getwspr.com" target="_blank" rel="noopener" class="work-item fade-in">
             <div>
@@ -711,14 +805,14 @@
                 <p>Voice-to-text desktop app powered by local AI models. Real-time transcription and rewriting, fully offline.</p>
                 <div class="work-tags">
                     <span class="tag">Electron</span>
-                    <span class="tag">Rust</span>
+                    <span class="tag">TypeScript</span>
                     <span class="tag">Whisper</span>
                     <span class="tag">macOS / Linux / Windows</span>
                 </div>
             </div>
             <span class="work-arrow">&rarr;</span>
         </a>
-        <a href="https://getpixel.dev" target="_blank" rel="noopener" class="work-item fade-in">
+        <a href="https://pixel.matpb.com" target="_blank" rel="noopener" class="work-item fade-in">
             <div>
                 <h3>Pixel</h3>
                 <p>Chrome extension that turns any webpage screenshot into clean, production-ready code with one click.</p>
@@ -743,7 +837,7 @@
             </div>
             <span class="work-arrow">&rarr;</span>
         </a>
-        <div class="work-item fade-in">
+        <a href="https://siku.org" target="_blank" rel="noopener" class="work-item fade-in">
             <div>
                 <h3>SIKU</h3>
                 <p>Senior backend and AI engineer on a large-scale Indigenous knowledge platform. Real-time data pipelines, geospatial systems, and AI integrations.</p>
@@ -754,7 +848,53 @@
                     <span class="tag">GIS</span>
                 </div>
             </div>
-            <span class="work-arrow" style="visibility:hidden">&rarr;</span>
+            <span class="work-arrow">&rarr;</span>
+        </a>
+    </div>
+</section>
+
+<!-- Open Source & Community -->
+<section class="opensource" id="opensource">
+    <p class="section-label fade-in">Open Source &amp; Community</p>
+    <h2 class="section-title fade-in">Things I give back.</h2>
+    <p class="opensource-intro fade-in">Beyond client work and products, I build and maintain free tools and platforms that people actually use.</p>
+    <div class="opensource-grid">
+        <div class="opensource-card fade-in">
+            <div class="opensource-icon">&#9881;</div>
+            <h3>MCP Servers</h3>
+            <p>Open-source Model Context Protocol servers for MySQL, Atlassian, and other databases — enabling AI agents to talk to real infrastructure.</p>
+            <div class="work-tags">
+                <span class="tag">Rust</span>
+                <span class="tag">Open Source</span>
+            </div>
+        </div>
+        <div class="opensource-card fade-in">
+            <div class="opensource-icon">&#9876;</div>
+            <h3>TTRPG Platform</h3>
+            <p>A free gaming platform for tabletop role-playing communities. Built and hosted because the hobby deserves better tools.</p>
+            <div class="work-tags">
+                <span class="tag">Web App</span>
+                <span class="tag">Free Hosted</span>
+            </div>
+        </div>
+        <div class="opensource-card fade-in">
+            <div class="opensource-icon">&#9733;</div>
+            <h3>Homeschool App</h3>
+            <p>AI-powered homeschooling platform for families — session tracking, curriculum planning, and intelligent learning support.</p>
+            <div class="work-tags">
+                <span class="tag">React</span>
+                <span class="tag">AI</span>
+                <span class="tag">Firebase</span>
+            </div>
+        </div>
+        <div class="opensource-card fade-in">
+            <div class="opensource-icon">&#9998;</div>
+            <h3>Markdown Everywhere</h3>
+            <p>A published Chrome extension that brings markdown rendering and editing to the browser. Free and open source.</p>
+            <div class="work-tags">
+                <span class="tag">Chrome Extension</span>
+                <span class="tag">Open Source</span>
+            </div>
         </div>
     </div>
 </section>
