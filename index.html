@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathieu-Philippe Bourgeois — Fractional CTO &amp; AI Engineer</title>
+    <meta name="description" content="Senior software architect, AI engineer, and fractional CTO with 20+ years of experience. I build what others spec out.">
+    <meta name="author" content="Mathieu-Philippe Bourgeois">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mathieu-Philippe Bourgeois — Fractional CTO & AI Engineer">
+    <meta property="og:description" content="Senior software architect, AI engineer, and fractional CTO with 20+ years of experience building production systems.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://matpb.com">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mathieu-Philippe Bourgeois — Fractional CTO & AI Engineer">
+    <meta name="twitter:description" content="Senior software architect, AI engineer, and fractional CTO with 20+ years of experience.">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mathieu-Philippe Bourgeois",
+        "url": "https://matpb.com",
+        "jobTitle": "Fractional CTO & AI Engineer",
+        "knowsAbout": ["Artificial Intelligence", "Software Architecture", "Full-Stack Development", "Machine Learning", "Cloud Infrastructure"],
+        "sameAs": [
+            "https://github.com/matpb",
+            "https://linkedin.com/in/matpb"
+        ]
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #111113;
+            --bg-card: #161618;
+            --bg-card-hover: #1c1c1f;
+            --border: #252528;
+            --text-primary: #f0f0f2;
+            --text-secondary: #9494a0;
+            --text-muted: #6b6b78;
+            --accent: #c8a44e;
+            --accent-dim: rgba(200, 164, 78, 0.15);
+            --accent-glow: rgba(200, 164, 78, 0.08);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.25rem 2rem;
+            background: rgba(10, 10, 11, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        nav.scrolled {
+            border-bottom-color: var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-mono);
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 400;
+            transition: color 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Sections */
+        section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 5rem;
+        }
+
+        .hero-greeting {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.6s ease 0.15s forwards;
+        }
+
+        .hero h1 .accent {
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.6s ease 0.3s forwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.6s ease 0.45s forwards;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.15);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-muted);
+            transform: translateY(-1px);
+        }
+
+        /* About */
+        .about {
+            padding-top: 8rem;
+            padding-bottom: 8rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: border-color 0.2s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent-dim);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.03em;
+            font-family: var(--font-mono);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Expertise */
+        .expertise {
+            padding-bottom: 8rem;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .expertise-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.25s;
+        }
+
+        .expertise-card:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .expertise-icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .expertise-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .expertise-card p {
+            color: var(--text-secondary);
+            font-size: 0.925rem;
+            line-height: 1.6;
+        }
+
+        /* Work */
+        .work {
+            padding-bottom: 8rem;
+        }
+
+        .work-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .work-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.25s;
+        }
+
+        .work-item:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .work-item h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+
+        .work-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .work-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 0.3rem 0.65rem;
+            border-radius: 6px;
+            background: var(--accent-dim);
+            color: var(--accent);
+            letter-spacing: 0.03em;
+        }
+
+        .work-arrow {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            transition: all 0.2s;
+        }
+
+        .work-item:hover .work-arrow {
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding-bottom: 8rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--accent);
+            opacity: 0.3;
+            position: absolute;
+            top: 0.5rem;
+            left: 1.25rem;
+            line-height: 1;
+        }
+
+        .testimonial-card blockquote {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1.25rem;
+            padding-top: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-role {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* Contact */
+        .contact {
+            padding-bottom: 8rem;
+        }
+
+        .contact-inner {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-inner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .contact h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .contact-email {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            color: var(--accent);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--accent-dim);
+            transition: border-color 0.2s;
+        }
+
+        .contact-email:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .contact-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile nav toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: rgba(10, 10, 11, 0.95);
+                backdrop-filter: blur(20px);
+                padding: 1rem 2rem 1.5rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .hero h1 { font-size: 2.25rem; }
+            .hero-sub { font-size: 1.05rem; }
+
+            .about-grid,
+            .expertise-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid { gap: 2.5rem; }
+
+            .work-item {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .work-arrow { display: none; }
+
+            .contact-inner { padding: 2rem 1.5rem; }
+
+            section { padding-left: 1.25rem; padding-right: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav id="nav">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">matpb</a>
+        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+    <p class="hero-greeting">// 20+ years of shipping software</p>
+    <h1>I build what others<br><span class="accent">spec out.</span></h1>
+    <p class="hero-sub">Fractional CTO, AI engineer, and full-stack architect. I turn ambitious ideas into production systems — fast.</p>
+    <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
+        <a href="#work" class="btn btn-secondary">See my work</a>
+    </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+    <div class="about-grid">
+        <div class="about-text fade-in">
+            <p class="section-label">About</p>
+            <h2 class="section-title">Self-taught at 13.<br>Still shipping at 33.</h2>
+            <p>I've spent two decades building software — from consulting for 3,000+ Mac clients as a teenager, to co-founding a development agency, to leading engineering as CIO and CTO at venture-backed companies.</p>
+            <p>Today, I work as a senior backend and AI engineer while running my own products on the side. I specialize in the kind of problems that sit at the intersection of architecture, artificial intelligence, and getting things done.</p>
+            <p>I don't do PowerPoints. I ship code.</p>
+        </div>
+        <div class="about-stats fade-in">
+            <div class="stat-card">
+                <div class="stat-number">20+</div>
+                <div class="stat-label">Years of experience</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3k+</div>
+                <div class="stat-label">Clients served</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">CTO</div>
+                <div class="stat-label">Leadership level</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Products shipped</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Expertise -->
+<section class="expertise" id="expertise">
+    <p class="section-label fade-in">Expertise</p>
+    <h2 class="section-title fade-in">What I bring to the table.</h2>
+    <div class="expertise-grid">
+        <div class="expertise-card fade-in">
+            <span class="expertise-icon">&#9670;</span>
+            <h3>Fractional CTO</h3>
+            <p>Technical leadership without the full-time overhead. I help startups and scale-ups make the right architectural decisions, hire effectively, and ship with confidence.</p>
+        </div>
+        <div class="expertise-card fade-in">
+            <span class="expertise-icon">&#9671;</span>
+            <h3>AI Engineering</h3>
+            <p>From LLM integrations and agent systems to custom ML pipelines. I build AI that works in production — not just in demos.</p>
+        </div>
+        <div class="expertise-card fade-in">
+            <span class="expertise-icon">&#9674;</span>
+            <h3>Full-Stack Architecture</h3>
+            <p>Rust, TypeScript, Python, Go — I pick the right tool for the job. Cloud infrastructure, APIs, real-time systems, and everything in between.</p>
+        </div>
+        <div class="expertise-card fade-in">
+            <span class="expertise-icon">&#9675;</span>
+            <h3>Product Development</h3>
+            <p>I don't just write code — I ship products. From concept to App Store, from MVP to scale. Strategy, execution, and everything it takes to get to market.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Work -->
+<section class="work" id="work">
+    <p class="section-label fade-in">Selected Work</p>
+    <h2 class="section-title fade-in">Things I've built.</h2>
+    <div class="work-grid">
+        <a href="https://getwspr.com" target="_blank" rel="noopener" class="work-item fade-in">
+            <div>
+                <h3>Wspr</h3>
+                <p>Voice-to-text desktop app powered by local AI models. Real-time transcription and rewriting, fully offline.</p>
+                <div class="work-tags">
+                    <span class="tag">Electron</span>
+                    <span class="tag">Rust</span>
+                    <span class="tag">Whisper</span>
+                    <span class="tag">macOS / Linux / Windows</span>
+                </div>
+            </div>
+            <span class="work-arrow">&rarr;</span>
+        </a>
+        <a href="https://getpixel.dev" target="_blank" rel="noopener" class="work-item fade-in">
+            <div>
+                <h3>Pixel</h3>
+                <p>Chrome extension that turns any webpage screenshot into clean, production-ready code with one click.</p>
+                <div class="work-tags">
+                    <span class="tag">Chrome Extension</span>
+                    <span class="tag">AI</span>
+                    <span class="tag">React</span>
+                </div>
+            </div>
+            <span class="work-arrow">&rarr;</span>
+        </a>
+        <a href="https://cortexmind.net" target="_blank" rel="noopener" class="work-item fade-in">
+            <div>
+                <h3>CortexMind / HiveMind</h3>
+                <p>Persistent memory and orchestration system for AI agents. Episodic memory, entity graphs, and multi-agent coordination.</p>
+                <div class="work-tags">
+                    <span class="tag">Rust</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">MCP</span>
+                    <span class="tag">AI Agents</span>
+                </div>
+            </div>
+            <span class="work-arrow">&rarr;</span>
+        </a>
+        <div class="work-item fade-in">
+            <div>
+                <h3>SIKU</h3>
+                <p>Senior backend and AI engineer on a large-scale Indigenous knowledge platform. Real-time data pipelines, geospatial systems, and AI integrations.</p>
+                <div class="work-tags">
+                    <span class="tag">Laravel</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">AI/ML</span>
+                    <span class="tag">GIS</span>
+                </div>
+            </div>
+            <span class="work-arrow" style="visibility:hidden">&rarr;</span>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials" id="testimonials">
+    <p class="section-label fade-in">Testimonials</p>
+    <h2 class="section-title fade-in">What people say.</h2>
+    <div class="testimonial-grid">
+        <div class="testimonial-card fade-in">
+            <blockquote>As a developer, Mat is a wizard. He executes with speed, creativity, and precision, often making the impossible look easy.</blockquote>
+            <p class="testimonial-author">Francisco Teigas</p>
+            <p class="testimonial-role">Co-founder &amp; collaborator</p>
+        </div>
+        <div class="testimonial-card fade-in">
+            <blockquote>He is an exceptional problem solver with the rare ability to adapt his approach to meet the needs of the organization at any stage.</blockquote>
+            <p class="testimonial-author">Evan Warner</p>
+            <p class="testimonial-role">Project Manager, Arctic Eider Society</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+    <div class="contact-inner fade-in">
+        <p class="section-label">Get in touch</p>
+        <h2>Let's build something.</h2>
+        <p>Have a project that needs senior technical leadership or AI expertise? I'm selectively available for consulting engagements.</p>
+        <a href="mailto:bourgeois.mat@gmail.com" class="contact-email">bourgeois.mat@gmail.com</a>
+        <div class="contact-links">
+            <a href="https://github.com/matpb" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/matpb" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    &copy; 2026 Mathieu-Philippe Bourgeois. All rights reserved.
+</footer>
+
+<script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.remove('open');
+        });
+    });
+</script>
+
+</body>
+</html>
