@@ -3,20 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mathieu-Philippe Bourgeois — Fractional CTO &amp; AI Engineer</title>
+    <title>Mathieu-Philippe Bourgeois · Fractional CTO &amp; AI Engineer</title>
     <meta name="description" content="Senior software architect, AI engineer, and fractional CTO with 30+ years of experience. I build what others spec out.">
     <meta name="author" content="Mathieu-Philippe Bourgeois">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Mathieu-Philippe Bourgeois — Fractional CTO & AI Engineer">
+    <meta property="og:title" content="Mathieu-Philippe Bourgeois · Fractional CTO & AI Engineer">
     <meta property="og:description" content="Senior software architect, AI engineer, and fractional CTO with 30+ years of experience building production systems.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://matpb.com">
+    <meta property="og:image" content="https://matpb.com/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Mathieu-Philippe Bourgeois — Fractional CTO & AI Engineer">
+    <meta name="twitter:title" content="Mathieu-Philippe Bourgeois · Fractional CTO & AI Engineer">
     <meta name="twitter:description" content="Senior software architect, AI engineer, and fractional CTO with 30+ years of experience.">
+    <meta name="twitter:image" content="https://matpb.com/assets/og-image.png">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <meta name="theme-color" content="#0D0E10">
 
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -37,23 +49,41 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-primary: #0a0a0b;
-            --bg-secondary: #111113;
-            --bg-card: #161618;
-            --bg-card-hover: #1c1c1f;
-            --border: #252528;
-            --text-primary: #f0f0f2;
-            --text-secondary: #9494a0;
-            --text-muted: #6b6b78;
-            --accent: #c8a44e;
-            --accent-dim: rgba(200, 164, 78, 0.15);
-            --accent-glow: rgba(200, 164, 78, 0.08);
+            /* Brand palette — extracted from matpb identity system */
+            --graphite: #0D0E10;
+            --forest: #0F3D32;
+            --forest-bright: #2E7B66;
+            --forest-dim: rgba(46, 123, 102, 0.18);
+            --forest-glow: rgba(46, 123, 102, 0.10);
+            --brass: #B08A3E;
+            --champagne: #E8E3D6;
+            --bone: #F6F4F0;
+
+            /* Surfaces */
+            --bg-primary: #0D0E10;
+            --bg-secondary: #14161A;
+            --bg-card: #181B1F;
+            --bg-card-hover: #1F2328;
+            --border: #2A2F36;
+
+            /* Typography colors */
+            --text-primary: #F6F4F0;
+            --text-secondary: #A8A39A;
+            --text-muted: #6E6A62;
+
+            /* Accent (Brass) */
+            --accent: #B08A3E;
+            --accent-bright: #C9A24E;
+            --accent-dim: rgba(176, 138, 62, 0.15);
+            --accent-glow: rgba(176, 138, 62, 0.10);
+
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+            --font-display: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
+            --font-mono: 'Space Grotesk', monospace;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -96,7 +126,7 @@
             transform: translateX(-50%);
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(200, 164, 78, 0.06) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(176, 138, 62, 0.07) 0%, rgba(15, 61, 50, 0.04) 40%, transparent 70%);
             z-index: -1;
             pointer-events: none;
             animation: glowPulse 8s ease-in-out infinite;
@@ -114,8 +144,8 @@
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 1.25rem 2rem;
-            background: rgba(10, 10, 11, 0.85);
+            padding: 1.1rem 2rem;
+            background: rgba(13, 14, 16, 0.82);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid transparent;
@@ -135,13 +165,28 @@
         }
 
         .nav-logo {
-            font-family: var(--font-mono);
-            font-weight: 500;
-            font-size: 1.1rem;
-            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
             text-decoration: none;
-            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: -0.04em;
+            line-height: 1;
         }
+
+        .nav-logo img {
+            width: 34px;
+            height: 34px;
+            border-radius: 7px;
+            display: block;
+        }
+
+        .nav-logo .wordmark { color: var(--text-primary); }
+        .nav-logo .wordmark .p { color: var(--forest-bright); }
+        .nav-logo .wordmark .b { color: var(--brass); }
 
         .nav-links {
             display: flex;
@@ -177,6 +222,12 @@
             text-transform: uppercase;
             letter-spacing: 0.15em;
             margin-bottom: 1.5rem;
+        }
+
+        /* Forest-accented sections — secondary brand voice */
+        .opensource .section-label,
+        .testimonials .section-label {
+            color: var(--forest-bright);
         }
 
         .section-title {
@@ -321,7 +372,7 @@
         }
 
         .stat-card:hover {
-            border-color: var(--accent-dim);
+            border-color: var(--forest-bright);
         }
 
         .stat-number {
@@ -364,10 +415,36 @@
         }
 
         .expertise-icon {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
             display: block;
+            color: var(--forest-bright);
         }
+
+        /* Icon system — SVG masked so color comes from CSS currentColor */
+        .icon {
+            display: inline-block;
+            width: 1.75rem;
+            height: 1.75rem;
+            background-color: currentColor;
+            -webkit-mask-position: center;
+            mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            vertical-align: middle;
+        }
+        .icon-compass-drafting { -webkit-mask-image: url(/assets/icons/compass-drafting.svg); mask-image: url(/assets/icons/compass-drafting.svg); }
+        .icon-microchip-ai     { -webkit-mask-image: url(/assets/icons/microchip-ai.svg);     mask-image: url(/assets/icons/microchip-ai.svg); }
+        .icon-layer-group      { -webkit-mask-image: url(/assets/icons/layer-group.svg);      mask-image: url(/assets/icons/layer-group.svg); }
+        .icon-rocket-launch    { -webkit-mask-image: url(/assets/icons/rocket-launch.svg);    mask-image: url(/assets/icons/rocket-launch.svg); }
+        .icon-cubes-stacked    { -webkit-mask-image: url(/assets/icons/cubes-stacked.svg);    mask-image: url(/assets/icons/cubes-stacked.svg); }
+        .icon-envelope         { -webkit-mask-image: url(/assets/icons/envelope-open-text.svg); mask-image: url(/assets/icons/envelope-open-text.svg); }
+        .icon-server           { -webkit-mask-image: url(/assets/icons/server.svg);           mask-image: url(/assets/icons/server.svg); }
+        .icon-dice             { -webkit-mask-image: url(/assets/icons/dice-d20.svg);         mask-image: url(/assets/icons/dice-d20.svg); }
+        .icon-graduation-cap   { -webkit-mask-image: url(/assets/icons/graduation-cap.svg);   mask-image: url(/assets/icons/graduation-cap.svg); }
+        .icon-markdown         { -webkit-mask-image: url(/assets/icons/markdown.svg);         mask-image: url(/assets/icons/markdown.svg); }
+        .icon-book             { -webkit-mask-image: url(/assets/icons/book.svg);             mask-image: url(/assets/icons/book.svg); }
 
         .expertise-card h3 {
             font-size: 1.15rem;
@@ -478,14 +555,15 @@
         }
 
         .opensource-card:hover {
-            border-color: var(--accent);
+            border-color: var(--forest-bright);
             background: var(--bg-card-hover);
             transform: translateY(-2px);
         }
 
         .opensource-icon {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
+            display: block;
+            color: var(--brass);
         }
 
         .opensource-card h3 {
@@ -525,8 +603,8 @@
             content: '"';
             font-size: 4rem;
             font-weight: 700;
-            color: var(--accent);
-            opacity: 0.3;
+            color: var(--forest-bright);
+            opacity: 0.45;
             position: absolute;
             top: 0.5rem;
             left: 1.25rem;
@@ -680,7 +758,7 @@
                 left: 0;
                 right: 0;
                 flex-direction: column;
-                background: rgba(10, 10, 11, 0.95);
+                background: rgba(13, 14, 16, 0.95);
                 backdrop-filter: blur(20px);
                 padding: 1rem 2rem 1.5rem;
                 gap: 1rem;
@@ -721,7 +799,10 @@
 <!-- Nav -->
 <nav id="nav">
     <div class="nav-inner">
-        <a href="#" class="nav-logo">matpb</a>
+        <a href="#" class="nav-logo" aria-label="matpb home">
+            <img src="/assets/icon-64.png" alt="" width="34" height="34">
+            <span class="wordmark">mat<span class="p">p</span><span class="b">b</span></span>
+        </a>
         <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
@@ -739,7 +820,7 @@
     <p class="hero-greeting">// 30+ years of shipping software</p>
     <h1>I build what others<br><span class="accent">spec out.</span></h1>
     <p class="hero-byline">Mathieu-Philippe Bourgeois</p>
-    <p class="hero-sub">Fractional CTO, AI engineer, and full-stack architect. I turn ambitious ideas into production systems — fast.</p>
+    <p class="hero-sub">Fractional CTO, AI engineer, and full-stack architect. I turn ambitious ideas into production systems. Fast.</p>
     <div class="hero-cta">
         <a href="#contact" class="btn btn-primary">Get in touch</a>
         <a href="#work" class="btn btn-secondary">See my work</a>
@@ -752,7 +833,7 @@
         <div class="about-text fade-in">
             <p class="section-label">About</p>
             <h2 class="section-title">Self-taught at 13.<br>Still shipping at 45.</h2>
-            <p>I've spent three decades building software — from consulting for 3,000+ Mac clients as a teenager, to co-founding a development agency, to leading engineering as CIO and CTO at venture-backed companies.</p>
+            <p>I've spent three decades building software, from consulting for 3,000+ Mac clients as a teenager, to co-founding a development agency, to leading engineering as CIO and CTO at venture-backed companies.</p>
             <p>Today, I work as a senior backend and AI engineer while running my own products on the side. I specialize in the kind of problems that sit at the intersection of architecture, artificial intelligence, blockchain, and getting things done.</p>
             <p>I don't do PowerPoints. I ship code.</p>
         </div>
@@ -783,27 +864,27 @@
     <h2 class="section-title fade-in">What I bring to the table.</h2>
     <div class="expertise-grid">
         <div class="expertise-card fade-in">
-            <span class="expertise-icon">&#9670;</span>
+            <span class="expertise-icon icon icon-compass-drafting" aria-hidden="true"></span>
             <h3>Fractional CTO</h3>
             <p>Technical leadership without the full-time overhead. I help startups and scale-ups make the right architectural decisions, hire effectively, and ship with confidence.</p>
         </div>
         <div class="expertise-card fade-in">
-            <span class="expertise-icon">&#9671;</span>
+            <span class="expertise-icon icon icon-microchip-ai" aria-hidden="true"></span>
             <h3>AI Engineering &amp; Consulting</h3>
             <p>From LLM integrations and agent systems to custom ML pipelines. I've trained engineering teams, brought companies into the AI era, and automated everything from front-desk call centers to full marketing pipelines.</p>
         </div>
         <div class="expertise-card fade-in">
-            <span class="expertise-icon">&#9674;</span>
+            <span class="expertise-icon icon icon-layer-group" aria-hidden="true"></span>
             <h3>Full-Stack Architecture</h3>
-            <p>Rust, TypeScript, Python, Go — I pick the right tool for the job. Cloud infrastructure, APIs, real-time systems, and everything in between.</p>
+            <p>Rust, TypeScript, Python, Go. I pick the right tool for the job. Cloud infrastructure, APIs, real-time systems, and everything in between.</p>
         </div>
         <div class="expertise-card fade-in">
-            <span class="expertise-icon">&#9675;</span>
+            <span class="expertise-icon icon icon-rocket-launch" aria-hidden="true"></span>
             <h3>Product Development</h3>
-            <p>I don't just write code — I ship products. From concept to App Store, from MVP to scale. Strategy, execution, and everything it takes to get to market.</p>
+            <p>I don't just write code. I ship products. From concept to App Store, from MVP to scale. Strategy, execution, and everything it takes to get to market.</p>
         </div>
         <div class="expertise-card fade-in">
-            <span class="expertise-icon">&#9830;</span>
+            <span class="expertise-icon icon icon-cubes-stacked" aria-hidden="true"></span>
             <h3>Blockchain &amp; Web3</h3>
             <p>Certified Cosmos developer with years of blockchain engineering for private clients. Smart contracts, custom chains, tokenomics, and decentralized infrastructure that actually ships.</p>
         </div>
@@ -876,9 +957,9 @@
     <p class="opensource-intro fade-in">Beyond client work and products, I build and maintain free tools and platforms that people actually use.</p>
     <div class="opensource-grid">
         <a href="https://github.com/matpb/google-mcp-rs" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
-            <div class="opensource-icon">&#9993;</div>
+            <div class="opensource-icon icon icon-envelope" aria-hidden="true"></div>
             <h3>Google Workspace MCP</h3>
-            <p>Rust MCP server giving AI agents the full Google Workspace surface — 76 tools across Gmail, Sheets, Drive, Docs, and Calendar. Multi-tenant OAuth 2.1, fully dockerized, native Rust performance on any machine.</p>
+            <p>Rust MCP server giving AI agents the full Google Workspace surface: 76 tools across Gmail, Sheets, Drive, Docs, and Calendar. Multi-tenant OAuth 2.1, fully dockerized, native Rust performance on any machine.</p>
             <div class="work-tags">
                 <span class="tag">Rust</span>
                 <span class="tag">MCP</span>
@@ -887,18 +968,18 @@
             </div>
         </a>
         <a href="https://github.com/matpb?tab=repositories&amp;q=mcp&amp;type=public" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
-            <div class="opensource-icon">&#9881;</div>
+            <div class="opensource-icon icon icon-server" aria-hidden="true"></div>
             <h3>MCP Servers</h3>
-            <p>Open-source Model Context Protocol servers for MySQL, Atlassian, QuickBooks, OpenAPI, GCloud Logging, and more — enabling AI agents to talk to real infrastructure.</p>
+            <p>Open-source Model Context Protocol servers for MySQL, Atlassian, QuickBooks, OpenAPI, GCloud Logging, and more, so AI agents can talk to real infrastructure.</p>
             <div class="work-tags">
                 <span class="tag">Rust</span>
                 <span class="tag">Open Source</span>
             </div>
         </a>
         <a href="https://fallout.matpb.com" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
-            <div class="opensource-icon">&#9876;</div>
+            <div class="opensource-icon icon icon-dice" aria-hidden="true"></div>
             <h3>TTRPG Tools</h3>
-            <p>A growing collection of free tools and platforms for tabletop role-playing communities — most recently a character manager for Fallout: The Roleplaying Game. Built and hosted because the hobby deserves better tools.</p>
+            <p>A growing collection of free tools and platforms for tabletop role-playing communities. Most recently, a character manager for Fallout: The Roleplaying Game. Built and hosted because the hobby deserves better tools.</p>
             <div class="work-tags">
                 <span class="tag">Web Apps</span>
                 <span class="tag">Free Hosted</span>
@@ -906,9 +987,9 @@
             </div>
         </a>
         <div class="opensource-card fade-in">
-            <div class="opensource-icon">&#9733;</div>
+            <div class="opensource-icon icon icon-graduation-cap" aria-hidden="true"></div>
             <h3>Homeschool App</h3>
-            <p>AI-powered homeschooling platform for families — session tracking, curriculum planning, and intelligent learning support.</p>
+            <p>AI-powered homeschooling platform for families: session tracking, curriculum planning, and intelligent learning support.</p>
             <div class="work-tags">
                 <span class="tag">React</span>
                 <span class="tag">AI</span>
@@ -916,7 +997,7 @@
             </div>
         </div>
         <a href="https://chromewebstore.google.com/detail/markdown-viewer/hminkmnhnjbjlkkooideehpkfojemhbk" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
-            <div class="opensource-icon">&#9998;</div>
+            <div class="opensource-icon icon icon-markdown" aria-hidden="true"></div>
             <h3>Markdown Viewer</h3>
             <p>A published Chrome extension that brings markdown rendering and editing to the browser. Free and open source.</p>
             <div class="work-tags">
@@ -925,7 +1006,7 @@
             </div>
         </a>
         <a href="https://storynest.matpb.com" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
-            <div class="opensource-icon">&#9789;</div>
+            <div class="opensource-icon icon icon-book" aria-hidden="true"></div>
             <h3>Story Nest</h3>
             <p>A cozy web app for families to write, illustrate, and share original bedtime stories for their kids. Free and public to read.</p>
             <div class="work-tags">
