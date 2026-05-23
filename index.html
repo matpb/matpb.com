@@ -510,6 +510,58 @@
             margin-bottom: 0.35rem;
         }
 
+        .work-byline {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--forest-bright);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .work-byline a {
+            color: var(--accent);
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .work-byline a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        /* Stretched-link pattern: lets the whole card be clickable while
+           allowing the byline link to remain independently clickable. */
+        .work-item.work-item-card {
+            position: relative;
+        }
+
+        .work-item-card h3 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .work-item-card h3 a::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .about-text a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-dim);
+            transition: border-color 0.2s;
+        }
+
+        .about-text a:hover {
+            border-bottom-color: var(--accent);
+        }
+
         .work-item p {
             color: var(--text-secondary);
             font-size: 0.9rem;
@@ -849,7 +901,7 @@
             <p class="section-label">About</p>
             <h2 class="section-title">Self-taught at 13.<br>Still shipping at 45.</h2>
             <p>I've spent three decades building software, from consulting for 3,000+ Mac clients as a teenager, to co-founding a development agency, to leading engineering as CIO and CTO at venture-backed companies.</p>
-            <p>Today, I work as a senior backend and AI engineer while running my own products on the side. I specialize in the kind of problems that sit at the intersection of architecture, artificial intelligence, blockchain, and getting things done.</p>
+            <p>Today, I work as a senior backend and AI engineer, run a few products of my own, and recently co-founded <a href="https://both-hands.com" target="_blank" rel="noopener">Both Hands</a> with Nathanael Hollands &mdash; an AI-for-good consultancy out of Sherbrooke. I specialize in the kind of problems that sit at the intersection of architecture, artificial intelligence, blockchain, and getting things done.</p>
             <p>I don't do PowerPoints. I ship code.</p>
         </div>
         <div class="about-stats fade-in">
@@ -911,6 +963,20 @@
     <p class="section-label fade-in">Selected Work</p>
     <h2 class="section-title fade-in">Things I've engineered.</h2>
     <div class="work-grid">
+        <div class="work-item work-item-card fade-in">
+            <div>
+                <h3><a href="https://cortexmind.net" target="_blank" rel="noopener">CortexMind</a></h3>
+                <p class="work-byline">Built at <a href="https://both-hands.com" target="_blank" rel="noopener">Both Hands</a> with Nat Hollands</p>
+                <p>Pure-RAG long-term memory for AI agents. Hybrid search with cross-encoder reranking, served from a single self-hosted Rust binary over MCP.</p>
+                <div class="work-tags">
+                    <span class="tag">Rust</span>
+                    <span class="tag">Advanced RAG</span>
+                    <span class="tag">MCP</span>
+                    <span class="tag">AI Agents</span>
+                </div>
+            </div>
+            <span class="work-arrow">&rarr;</span>
+        </div>
         <a href="https://getwspr.com" target="_blank" rel="noopener" class="work-item fade-in">
             <div>
                 <h3>Wspr</h3>
@@ -920,19 +986,6 @@
                     <span class="tag">TypeScript</span>
                     <span class="tag">Whisper</span>
                     <span class="tag">macOS / Linux / Windows</span>
-                </div>
-            </div>
-            <span class="work-arrow">&rarr;</span>
-        </a>
-        <a href="https://cortexmind.net" target="_blank" rel="noopener" class="work-item fade-in">
-            <div>
-                <h3>CortexMind</h3>
-                <p>Pure-RAG long-term memory for AI agents. Hybrid search with cross-encoder reranking, served from a single self-hosted Rust binary over MCP.</p>
-                <div class="work-tags">
-                    <span class="tag">Rust</span>
-                    <span class="tag">Advanced RAG</span>
-                    <span class="tag">MCP</span>
-                    <span class="tag">AI Agents</span>
                 </div>
             </div>
             <span class="work-arrow">&rarr;</span>
