@@ -654,18 +654,36 @@
             padding-bottom: 8rem;
         }
 
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .testimonial-marquee {
+            position: relative;
+            overflow: hidden;
+            cursor: grab;
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+        }
+
+        .testimonial-marquee.dragging { cursor: grabbing; }
+
+        .testimonial-track {
+            display: flex;
             gap: 1.5rem;
+            align-items: stretch;
+            width: max-content;
+            will-change: transform;
+            touch-action: pan-y;
         }
 
         .testimonial-card {
+            flex: 0 0 360px;
+            width: 360px;
+            display: flex;
+            flex-direction: column;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 2.25rem 2.5rem;
             position: relative;
+            user-select: none;
         }
 
         .testimonial-card::before {
@@ -843,12 +861,17 @@
 
             .about-grid,
             .expertise-grid,
-            .opensource-grid,
-            .testimonial-grid {
+            .opensource-grid {
                 grid-template-columns: 1fr;
             }
 
             .about-grid { gap: 2.5rem; }
+
+            .testimonial-card {
+                flex-basis: 280px;
+                width: 280px;
+                padding: 1.75rem 1.5rem;
+            }
 
             .work-item {
                 grid-template-columns: 1fr;
@@ -997,10 +1020,10 @@
                 <h3>Wspr</h3>
                 <p>Voice-to-text desktop app powered by local AI models. Real-time transcription and rewriting, fully offline.</p>
                 <div class="work-tags">
-                    <span class="tag">Electron</span>
-                    <span class="tag">TypeScript</span>
-                    <span class="tag">Whisper</span>
-                    <span class="tag">macOS / Linux / Windows</span>
+                    <span class="tag">Rust</span>
+                    <span class="tag">Local AI</span>
+                    <span class="tag">Privacy</span>
+                    <span class="tag">Productivity</span>
                 </div>
             </div>
             <span class="work-arrow">&rarr;</span>
@@ -1130,16 +1153,28 @@
 <section class="testimonials" id="testimonials">
     <p class="section-label fade-in">Testimonials</p>
     <h2 class="section-title fade-in">What people say.</h2>
-    <div class="testimonial-grid">
-        <div class="testimonial-card fade-in">
-            <blockquote>As a developer, Mat is a wizard. He executes with speed, creativity, and precision, often making the impossible look easy.</blockquote>
+    <div class="testimonial-marquee fade-in">
+        <div class="testimonial-track">
+        <div class="testimonial-card">
+            <blockquote>As a developer, Mat is a wizard &mdash; he executes with speed, creativity, and precision, often making the impossible look easy. As a co-founder, he brings a rare kind of clarity: he asks the hard questions, names the things others avoid, and holds everyone to a high standard of honesty and accountability. That balance of brutal honesty and lighthearted humanity is rare, and it's a big part of why working with him is not just effective, but energizing.</blockquote>
             <p class="testimonial-author">Francisco Teigas</p>
             <p class="testimonial-role">Co-founder &amp; collaborator</p>
         </div>
-        <div class="testimonial-card fade-in">
-            <blockquote>He is an exceptional problem solver with the rare ability to adapt his approach to meet the needs of the organization at any stage.</blockquote>
+        <div class="testimonial-card">
+            <blockquote>I worked with Mat for many years on SIKU, and I can't say enough good things about him. He's an exceptional problem solver with the rare ability to adapt his approach to the needs of the organization at any stage &mdash; thriving in fast-paced iteration early on, then shifting to long-term thinking and detail as the product matured. What truly sets him apart are his communication skills and genuine kindness. A rare talent, and an even better human being.</blockquote>
             <p class="testimonial-author">Evan Warner</p>
-            <p class="testimonial-role">Project Manager, Arctic Eider Society</p>
+            <p class="testimonial-role">SIKU Product Manager, Arctic Eider Society</p>
+        </div>
+        <div class="testimonial-card">
+            <blockquote>Mat is one of the most genuine and cooperative people I've had the pleasure of working with. He thrives when challenged with new problems and consistently brings creative solutions to both technical and business needs. If you're looking for someone who can not only get things done, but ask the right questions along the way and build peers up, you'll be hard pressed to find a better person.</blockquote>
+            <p class="testimonial-author">Reagan McFadden</p>
+            <p class="testimonial-role">Web Developer &amp; collaborator</p>
+        </div>
+        <div class="testimonial-card">
+            <blockquote>Mat is an exceptionally talented engineer &mdash; I've been consistently impressed by how quickly he learns and masters new technologies, whether he's building social platforms, finance products, or crypto solutions. He effortlessly bridges the gap between business goals and technical solutions, a true unicorn in the field. If you're looking for someone who can elevate your team and inspire everyone around them, I can't recommend him highly enough.</blockquote>
+            <p class="testimonial-author">Ale Mazzarella</p>
+            <p class="testimonial-role">Marketing Technology Architect</p>
+        </div>
         </div>
     </div>
 </section>
@@ -1154,6 +1189,7 @@
         <div class="contact-links">
             <a href="https://github.com/matpb" target="_blank" rel="noopener">GitHub</a>
             <a href="https://linkedin.com/in/matpb" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://both-hands.com" target="_blank" rel="noopener">Both Hands</a>
         </div>
     </div>
 </section>
@@ -1180,6 +1216,118 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Testimonial marquee — continuous left-to-right drift, hover-to-center, drag-to-scrub
+    (function () {
+        const marquee = document.querySelector('.testimonial-marquee');
+        if (!marquee) return;
+        const track = marquee.querySelector('.testimonial-track');
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const SPEED = 20;            // px per second of rightward drift
+        const originals = Array.from(track.children);
+
+        let setWidth = 0;            // width of one full set of originals incl. gaps
+        let offset = 0;              // current translateX in px (kept in (-setWidth, 0])
+        let paused = false;
+        let dragging = false;
+        let dragStartX = 0, dragStartOffset = 0;
+        let lastTs = 0;
+
+        function gapPx() {
+            const s = getComputedStyle(track);
+            return parseFloat(s.columnGap || s.gap) || 0;
+        }
+
+        function buildLoop() {
+            track.querySelectorAll('[data-clone]').forEach(n => n.remove());
+            const gap = gapPx();
+            const cardW = originals[0].getBoundingClientRect().width;
+            setWidth = originals.length * (cardW + gap);
+            const need = marquee.clientWidth + setWidth * 2;
+            let guard = 0;
+            while (track.scrollWidth < need && guard < 16) {
+                originals.forEach(c => {
+                    const cl = c.cloneNode(true);
+                    cl.setAttribute('data-clone', '');
+                    cl.setAttribute('aria-hidden', 'true');
+                    track.appendChild(cl);
+                });
+                guard++;
+            }
+        }
+
+        function norm(x) {
+            if (!setWidth) return x;
+            x = x % setWidth;
+            if (x > 0) x -= setWidth;
+            return x;
+        }
+
+        function apply() { track.style.transform = 'translateX(' + offset + 'px)'; }
+
+        function frame(ts) {
+            if (!lastTs) lastTs = ts;
+            const dt = ts - lastTs;
+            lastTs = ts;
+            if (!paused && !dragging && !reduce && setWidth) {
+                offset = norm(offset + SPEED * dt / 1000);
+                track.style.transition = 'none';
+                apply();
+            }
+            requestAnimationFrame(frame);
+        }
+
+        // Hover: simply pause the drift (cards hold their place)
+        marquee.addEventListener('mouseenter', () => { paused = true; });
+        marquee.addEventListener('mouseleave', () => {
+            if (dragging) return;
+            paused = false;
+            lastTs = 0;
+        });
+
+        // Drag to scrub (mouse + touch via pointer events)
+        marquee.addEventListener('pointerdown', (e) => {
+            dragging = true;
+            dragStartX = e.clientX;
+            dragStartOffset = offset;
+            marquee.classList.add('dragging');
+            track.style.transition = 'none';
+            try { marquee.setPointerCapture(e.pointerId); } catch (_) {}
+        });
+        marquee.addEventListener('pointermove', (e) => {
+            if (!dragging) return;
+            let raw = dragStartOffset + (e.clientX - dragStartX);
+            // keep within one period seamlessly so the loop never runs dry
+            while (raw > 0) { raw -= setWidth; dragStartOffset -= setWidth; }
+            while (raw <= -setWidth) { raw += setWidth; dragStartOffset += setWidth; }
+            offset = raw;
+            apply();
+        });
+        function endDrag(e) {
+            if (!dragging) return;
+            dragging = false;
+            marquee.classList.remove('dragging');
+            offset = norm(offset);
+            lastTs = 0;
+            try { marquee.releasePointerCapture(e.pointerId); } catch (_) {}
+            if (!marquee.matches(':hover')) paused = false;
+        }
+        marquee.addEventListener('pointerup', endDrag);
+        marquee.addEventListener('pointercancel', endDrag);
+
+        function init() {
+            buildLoop();
+            offset = norm(offset);
+            track.style.transition = 'none';
+            apply();
+        }
+        init();
+        window.addEventListener('load', init);
+        let rt;
+        window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(init, 200); });
+
+        requestAnimationFrame(frame);
+    })();
 
     // Close mobile nav on link click
     document.querySelectorAll('.nav-links a').forEach(link => {
