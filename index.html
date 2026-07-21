@@ -606,7 +606,24 @@
             color: var(--text-secondary);
             font-size: 1.05rem;
             max-width: 600px;
+            margin-bottom: 1.25rem;
+        }
+
+        .opensource-github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--forest-bright);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
             margin-bottom: 2.5rem;
+            transition: gap 0.2s;
+        }
+
+        .opensource-github-link:hover {
+            gap: 0.65rem;
         }
 
         .opensource-grid {
@@ -1074,6 +1091,7 @@
     <p class="section-label fade-in">Open Source &amp; Community</p>
     <h2 class="section-title fade-in">Things I give back.</h2>
     <p class="opensource-intro fade-in">Beyond client work and products, I build and maintain free tools and platforms that people actually use.</p>
+    <a href="https://github.com/matpb?tab=repositories&amp;q=&amp;type=public&amp;language=&amp;sort=" target="_blank" rel="noopener" class="opensource-github-link fade-in">View all repositories on GitHub &rarr;</a>
     <div class="opensource-grid">
         <a href="https://github.com/matpb/google-mcp-rs" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
             <div class="opensource-icon icon icon-envelope" aria-hidden="true"></div>
