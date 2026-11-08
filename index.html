@@ -43,7 +43,7 @@
     <meta name="msapplication-TileColor" content="#0D0E10">
     <meta name="msapplication-TileImage" content="/assets/ms-icon-144x144.png">
     <meta name="msapplication-config" content="/assets/browserconfig.xml">
-    <meta name="theme-color" content="#0D0E10">
+    <meta name="theme-color" content="#f7f1e6">
 
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -64,1350 +64,213 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            /* Brand palette — extracted from matpb identity system */
-            --graphite: #0D0E10;
-            --forest: #0F3D32;
-            --forest-bright: #2E7B66;
-            --forest-dim: rgba(46, 123, 102, 0.18);
-            --forest-glow: rgba(46, 123, 102, 0.10);
-            --brass: #B08A3E;
-            --champagne: #E8E3D6;
-            --bone: #F6F4F0;
-
-            /* Surfaces */
-            --bg-primary: #0D0E10;
-            --bg-secondary: #14161A;
-            --bg-card: #181B1F;
-            --bg-card-hover: #1F2328;
-            --border: #2A2F36;
-
-            /* Typography colors */
-            --text-primary: #F6F4F0;
-            --text-secondary: #A8A39A;
-            --text-muted: #6E6A62;
-
-            /* Accent (Brass) */
-            --accent: #B08A3E;
-            --accent-bright: #C9A24E;
-            --accent-dim: rgba(176, 138, 62, 0.15);
-            --accent-glow: rgba(176, 138, 62, 0.10);
-
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-display: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
-            --font-mono: 'Space Grotesk', monospace;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Subtle background texture */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            opacity: 0.035;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            background-repeat: repeat;
-            background-size: 256px 256px;
-            pointer-events: none;
-        }
-
-        /* Soft radial glow behind hero */
-        body::after {
-            content: '';
-            position: fixed;
-            top: -20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(176, 138, 62, 0.07) 0%, rgba(15, 61, 50, 0.04) 40%, transparent 70%);
-            z-index: -1;
-            pointer-events: none;
-            animation: glowPulse 8s ease-in-out infinite;
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
-            50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
-        }
-
-        /* Nav */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            padding: 1.1rem 2rem;
-            background: rgba(13, 14, 16, 0.82);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.3s;
-        }
-
-        nav.scrolled {
-            border-bottom-color: var(--border);
-        }
-
-        .nav-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.65rem;
-            text-decoration: none;
-            color: var(--text-primary);
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1.35rem;
-            letter-spacing: -0.04em;
-            line-height: 1;
-        }
-
-        .nav-logo img {
-            width: 34px;
-            height: 34px;
-            border-radius: 7px;
-            display: block;
-        }
-
-        .nav-logo .wordmark { color: var(--text-primary); }
-        .nav-logo .wordmark .p { color: var(--forest-bright); }
-        .nav-logo .wordmark .b { color: var(--brass); }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 400;
-            transition: color 0.2s;
-            letter-spacing: 0.01em;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        /* Sections */
-        section {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            scroll-margin-top: 6rem;
-        }
-
-        .section-label {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Forest-accented sections — secondary brand voice */
-        .opensource .section-label,
-        .testimonials .section-label {
-            color: var(--forest-bright);
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: -0.03em;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-top: 5rem;
-        }
-
-        .hero-greeting {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 700;
-            letter-spacing: -0.04em;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeUp 0.6s ease 0.15s forwards;
-        }
-
-        .hero h1 .accent {
-            color: var(--accent);
-        }
-
-        .hero-byline {
-            font-family: var(--font-mono);
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-top: -0.75rem;
-            margin-bottom: 1.75rem;
-            opacity: 0;
-            animation: fadeUp 0.6s ease 0.25s forwards;
-        }
-
-        .hero-byline::before {
-            content: "— ";
-            color: var(--accent);
-        }
-
-        .hero-sub {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            line-height: 1.6;
-            margin-bottom: 2.5rem;
-            opacity: 0;
-            animation: fadeUp 0.6s ease 0.3s forwards;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeUp 0.6s ease 0.45s forwards;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 1.75rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: var(--bg-primary);
-        }
-
-        .btn-primary:hover {
-            filter: brightness(1.15);
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--text-muted);
-            transform: translateY(-1px);
-        }
-
-        /* About */
-        .about {
-            padding-top: 8rem;
-            padding-bottom: 8rem;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-        }
-
-        .about-text p {
-            color: var(--text-secondary);
-            margin-bottom: 1.25rem;
-            font-size: 1.05rem;
-        }
-
-        .about-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: border-color 0.2s;
-        }
-
-        .stat-card:hover {
-            border-color: var(--forest-bright);
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent);
-            letter-spacing: -0.03em;
-            font-family: var(--font-mono);
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 0.25rem;
-        }
-
-        /* Expertise */
-        .expertise {
-            padding-bottom: 8rem;
-        }
-
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        .expertise-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.25s;
-        }
-
-        .expertise-card:hover {
-            border-color: var(--accent);
-            background: var(--bg-card-hover);
-            transform: translateY(-2px);
-        }
-
-        .expertise-icon {
-            margin-bottom: 1.25rem;
-            display: block;
-            color: var(--forest-bright);
-        }
-
-        /* Icon system — SVG masked so color comes from CSS currentColor */
-        .icon {
-            display: inline-block;
-            width: 1.75rem;
-            height: 1.75rem;
-            background-color: currentColor;
-            -webkit-mask-position: center;
-            mask-position: center;
-            -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
-            -webkit-mask-size: contain;
-            mask-size: contain;
-            vertical-align: middle;
-        }
-        .icon-compass-drafting { -webkit-mask-image: url(/assets/icons/compass-drafting.svg); mask-image: url(/assets/icons/compass-drafting.svg); }
-        .icon-microchip-ai     { -webkit-mask-image: url(/assets/icons/microchip-ai.svg);     mask-image: url(/assets/icons/microchip-ai.svg); }
-        .icon-layer-group      { -webkit-mask-image: url(/assets/icons/layer-group.svg);      mask-image: url(/assets/icons/layer-group.svg); }
-        .icon-rocket-launch    { -webkit-mask-image: url(/assets/icons/rocket-launch.svg);    mask-image: url(/assets/icons/rocket-launch.svg); }
-        .icon-cubes-stacked    { -webkit-mask-image: url(/assets/icons/cubes-stacked.svg);    mask-image: url(/assets/icons/cubes-stacked.svg); }
-        .icon-envelope         { -webkit-mask-image: url(/assets/icons/envelope-open-text.svg); mask-image: url(/assets/icons/envelope-open-text.svg); }
-        .icon-fingerprint      { -webkit-mask-image: url(/assets/icons/fingerprint.svg);       mask-image: url(/assets/icons/fingerprint.svg); }
-        .icon-server           { -webkit-mask-image: url(/assets/icons/server.svg);           mask-image: url(/assets/icons/server.svg); }
-        .icon-dice             { -webkit-mask-image: url(/assets/icons/dice-d20.svg);         mask-image: url(/assets/icons/dice-d20.svg); }
-        .icon-graduation-cap   { -webkit-mask-image: url(/assets/icons/graduation-cap.svg);   mask-image: url(/assets/icons/graduation-cap.svg); }
-        .icon-markdown         { -webkit-mask-image: url(/assets/icons/markdown.svg);         mask-image: url(/assets/icons/markdown.svg); }
-        .icon-book             { -webkit-mask-image: url(/assets/icons/book.svg);             mask-image: url(/assets/icons/book.svg); }
-        .icon-brain            { -webkit-mask-image: url(/assets/icons/brain.svg);            mask-image: url(/assets/icons/brain.svg); }
-        .icon-gauge            { -webkit-mask-image: url(/assets/icons/gauge.svg);            mask-image: url(/assets/icons/gauge.svg); }
-        .icon-waveform         { -webkit-mask-image: url(/assets/icons/waveform.svg);         mask-image: url(/assets/icons/waveform.svg); }
-
-        .expertise-card h3 {
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.01em;
-        }
-
-        .expertise-card p {
-            color: var(--text-secondary);
-            font-size: 0.925rem;
-            line-height: 1.6;
-        }
-
-        /* Work */
-        .work {
-            padding-bottom: 8rem;
-        }
-
-        .work-grid {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .work-item {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: center;
-            gap: 2rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.75rem 2rem;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.25s;
-        }
-
-        .work-item:hover {
-            border-color: var(--accent);
-            background: var(--bg-card-hover);
-            transform: translateY(-2px);
-        }
-
-        .work-item h3 {
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 0.35rem;
-        }
-
-        .work-byline {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--forest-bright);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-        }
-
-        .work-byline a {
-            color: var(--accent);
-            font-weight: 700;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.2s;
-            position: relative;
-            z-index: 2;
-        }
-
-        .work-byline a:hover {
-            border-bottom-color: var(--accent);
-        }
-
-        /* Stretched-link pattern: lets the whole card be clickable while
-           allowing the byline link to remain independently clickable. */
-        .work-item.work-item-card {
-            position: relative;
-        }
-
-        .work-item-card h3 a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .work-item-card h3 a::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-        }
-
-        .about-text a {
-            color: var(--accent);
-            text-decoration: none;
-            border-bottom: 1px solid var(--accent-dim);
-            transition: border-color 0.2s;
-        }
-
-        .about-text a:hover {
-            border-bottom-color: var(--accent);
-        }
-
-        .work-item p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .work-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-top: 0.75rem;
-        }
-
-        .tag {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            padding: 0.3rem 0.65rem;
-            border-radius: 6px;
-            background: var(--accent-dim);
-            color: var(--accent);
-            letter-spacing: 0.03em;
-        }
-
-        .work-arrow {
-            color: var(--text-muted);
-            font-size: 1.25rem;
-            transition: all 0.2s;
-        }
-
-        .work-item:hover .work-arrow {
-            color: var(--accent);
-            transform: translateX(4px);
-        }
-
-        /* Open Source */
-        .opensource {
-            padding-bottom: 8rem;
-        }
-
-        .opensource-intro {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            max-width: 600px;
-            margin-bottom: 1.25rem;
-        }
-
-        .opensource-github-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            color: var(--forest-bright);
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-decoration: none;
-            margin-bottom: 2.5rem;
-            transition: gap 0.2s;
-        }
-
-        .opensource-github-link:hover {
-            gap: 0.65rem;
-        }
-
-        .opensource-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-
-        .opensource-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.25s;
-        }
-
-        .opensource-card:hover {
-            border-color: var(--forest-bright);
-            background: var(--bg-card-hover);
-            transform: translateY(-2px);
-        }
-
-        .opensource-icon {
-            margin-bottom: 1.25rem;
-            display: block;
-            color: var(--brass);
-        }
-
-        .opensource-card h3 {
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.01em;
-        }
-
-        .opensource-card p {
-            color: var(--text-secondary);
-            font-size: 0.925rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        /* Testimonials */
-        .testimonials {
-            padding-bottom: 8rem;
-        }
-
-        .testimonial-marquee {
-            position: relative;
-            overflow: hidden;
-            cursor: grab;
-            -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
-            mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
-        }
-
-        .testimonial-marquee.dragging { cursor: grabbing; }
-
-        .testimonial-track {
-            display: flex;
-            gap: 1.5rem;
-            align-items: stretch;
-            width: max-content;
-            will-change: transform;
-            touch-action: pan-y;
-        }
-
-        .testimonial-card {
-            flex: 0 0 360px;
-            width: 360px;
-            display: flex;
-            flex-direction: column;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2.25rem 2.5rem;
-            position: relative;
-            user-select: none;
-        }
-
-        .testimonial-card::before {
-            content: '"';
-            font-size: 4rem;
-            font-weight: 700;
-            color: var(--forest-bright);
-            opacity: 0.45;
-            position: absolute;
-            top: 0.5rem;
-            left: 1.25rem;
-            line-height: 1;
-        }
-
-        .testimonial-card blockquote {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.7;
-            font-style: italic;
-            margin-bottom: 1.25rem;
-            padding-top: 1rem;
-        }
-
-        .testimonial-author {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .testimonial-role {
-            color: var(--text-muted);
-            font-size: 0.8rem;
-        }
-
-        /* Contact */
-        .contact {
-            padding-bottom: 8rem;
-        }
-
-        .contact-inner {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 3.5rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-inner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        }
-
-        .contact h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: -0.03em;
-            margin-bottom: 1rem;
-        }
-
-        .contact p {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            max-width: 500px;
-            margin: 0 auto 2rem;
-        }
-
-        .contact-email {
-            font-family: var(--font-mono);
-            font-size: 1.1rem;
-            color: var(--accent);
-            text-decoration: none;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--accent-dim);
-            transition: border-color 0.2s;
-        }
-
-        .contact-email:hover {
-            border-bottom-color: var(--accent);
-        }
-
-        .contact-cta { justify-content: center; margin: 0 0 1.25rem; }
-        .contact .contact-fr { margin: 1rem auto 0; font-size: 0.95rem; opacity: 0.75; }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .contact-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.875rem;
-            transition: color 0.2s;
-        }
-
-        .contact-links a:hover {
-            color: var(--text-primary);
-        }
-
-        /* Footer */
-        footer {
-            padding: 2rem;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            border-top: 1px solid var(--border);
-        }
-
-        /* Animations */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile nav toggle */
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.25rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                background: rgba(13, 14, 16, 0.95);
-                backdrop-filter: blur(20px);
-                padding: 1rem 2rem 1.5rem;
-                gap: 1rem;
-                border-bottom: 1px solid var(--border);
-            }
-
-            .nav-links.open {
-                display: flex;
-            }
-
-            .hero h1 { font-size: 2.25rem; }
-            .hero-sub { font-size: 1.05rem; }
-
-            .about-grid,
-            .expertise-grid,
-            .opensource-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .about-grid { gap: 2.5rem; }
-
-            .testimonial-card {
-                flex-basis: 280px;
-                width: 280px;
-                padding: 1.75rem 1.5rem;
-            }
-
-            .work-item {
-                grid-template-columns: 1fr;
-                gap: 0.75rem;
-            }
-
-            .work-arrow { display: none; }
-
-            .contact-inner { padding: 2rem 1.5rem; }
-
-            section { padding-left: 1.25rem; padding-right: 1.25rem; }
-        }
-    </style>
+:root{--paper:#f7f1e6;--card:#fffaf0;--ink:#17352c;--soft:#566a60;--forest:#0f3d32;--moss:#2e7b66;--brass:#b08a3e;--gold:#c9a24e;--clay:#b8623f;--line:#e4d9c3;--cream:#f6f4f0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;height:auto}
+a{color:inherit}
+.w{max-width:1120px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.14;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(38px,5.4vw,62px)}
+h2{font-size:clamp(30px,3.8vw,44px)}
+h3{font-size:23px}
+p{margin:0 0 16px}
+.hand{font-family:Caveat,cursive;font-size:25px;line-height:1.15;color:var(--clay)}
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:600 20px Fraunces,Georgia,serif}
+.logo img{width:34px;height:34px}
+.logo b{font-weight:600;color:var(--moss)}.logo i{font-style:normal;color:var(--brass)}
+.links{display:flex;gap:26px;font-size:15px;font-weight:500}
+.links a{text-decoration:none}.links a:hover{color:var(--moss)}
+.btn{display:inline-block;background:var(--forest);color:var(--cream);text-decoration:none;font-weight:600;padding:14px 26px;border-radius:999px}
+.btn:hover{background:var(--moss)}
+.ghost{display:inline-block;font-weight:600;padding:14px 6px;text-underline-offset:4px}
+.hero{display:grid;grid-template-columns:1fr 1.12fr;gap:56px;align-items:center;padding:30px 0 90px}
+.hero p.l{font-size:20px;color:var(--soft);margin:22px 0 28px;max-width:30em}
+.hero .fr{font-size:15px;color:var(--soft);margin:18px 0 0}
+.frame{border-radius:22px;overflow:hidden;box-shadow:0 22px 50px -24px rgba(23,53,44,.55)}
+.heroart{position:relative}
+.me{position:absolute;left:-26px;bottom:-40px;display:flex;align-items:flex-end;gap:10px}
+.me img{width:112px;height:112px;border-radius:50%;object-fit:cover;border:5px solid var(--paper)}
+.me span{transform:rotate(-3deg);white-space:nowrap}
+section{padding:90px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.two.flip>:first-child{order:2}
+.cap{margin-top:12px;text-align:center}
+.tilt{transform:rotate(-1.2deg)}
+.tiltb{transform:rotate(1deg)}
+.kick{font:600 14px Inter,sans-serif;letter-spacing:.04em;color:var(--brass);margin-bottom:12px}
+h2+p{margin-top:20px}
+.dark{background:var(--forest);color:var(--cream)}
+.dark .kick{color:var(--gold)}
+.dark p{color:#d9e0d6}
+.dark .hand{color:var(--gold)}
+.help{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:40px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px}
+.c p{color:var(--soft);margin:10px 0 0;font-size:16px}
+.note{margin-top:30px;font-size:18px}
+.ice{position:relative;color:var(--cream);padding:0;overflow:hidden}
+.ice img{width:100%;height:clamp(460px,52vw,640px);object-fit:cover}
+.ice .t{position:absolute;inset:auto 0 0 0;padding:150px 0 54px;background:linear-gradient(transparent,rgba(9,36,29,.9) 58%)}
+.ice p{max-width:36em;font-size:19px;margin-top:16px}
+.made{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:40px}
+.p{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;transition:transform .2s}
+.p:hover{transform:translateY(-4px)}
+.p div{padding:20px 22px 24px}
+.p p{font-size:15.5px;color:var(--soft);margin:8px 0 0}
+.more{margin-top:26px;color:var(--soft)}
+.q{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:40px}
+blockquote{margin:0;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px;font:400 20px/1.45 Fraunces,Georgia,serif}
+blockquote footer{font:500 14.5px/1.4 Inter,sans-serif;color:var(--soft);margin-top:16px}
+.hills{width:100%;height:clamp(200px,28vw,380px);object-fit:cover}
+.hello{background:var(--forest);color:var(--cream);text-align:center;padding:70px 0 40px}
+.hello p{max-width:32em;margin:18px auto 26px;font-size:19px;color:#d9e0d6}
+.hello .btn{background:var(--gold);color:#17352c}.hello .btn:hover{background:var(--cream)}
+.hello .ghost{color:var(--cream);margin-left:14px}
+.foot{margin-top:56px;font-size:14px;color:#a9bbb0;display:flex;gap:22px;justify-content:center;flex-wrap:wrap}
+.foot a{text-underline-offset:3px}
+@media(max-width:900px){.made{grid-template-columns:1fr 1fr}.links{display:none}}
+@media(max-width:760px){
+ body{font-size:16.5px}
+ section{padding:62px 0}
+ .hero,.two,.help,.q{grid-template-columns:1fr;gap:30px}
+ .hero{padding:10px 0 70px}
+ .two.flip>:first-child{order:0}
+ .me{left:8px;bottom:-36px}.me img{width:88px;height:88px}
+ .tilt,.tiltb{transform:none}
+ .hello .ghost{margin-left:0;display:block}
+}
+@media(max-width:480px){.made{grid-template-columns:1fr}.w{padding:0 16px}}
+</style>
 </head>
 <body>
-
-<!-- Nav -->
-<nav id="nav">
-    <div class="nav-inner">
-        <a href="#" class="nav-logo" aria-label="matpb home">
-            <img src="/assets/matpb-logo.png" alt="" width="34" height="34">
-            <span class="wordmark">mat<span class="p">p</span><span class="b">b</span></span>
-        </a>
-        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#expertise">Services</a></li>
-            <li><a href="#work">Work</a></li>
-            <li><a href="#opensource">Open Source</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
+<div class="w">
+<nav>
+  <a class="logo" href="#top"><img src="/assets/matpb-logo.png" width="34" height="34" alt=""><span>mat<b>p</b><i>b</i></span></a>
+  <div class="links"><a href="#story">My story</a><a href="#teaching">Teaching</a><a href="#help">How I can help</a><a href="#made">What I've made</a><a href="#words">Kind words</a></div>
+  <a class="btn" href="#hello" style="padding:10px 20px;font-size:15px">Say hello</a>
 </nav>
+<header class="hero" id="top">
+  <div>
+    <h1>I build AI that helps people, and I teach people to build with it.</h1>
+    <p class="l">I'm Mat. I've been at this since I was 13. These days I sit down with teams, nonprofits and curious neighbours, and we work out what AI can really do for them.</p>
+    <a class="btn" href="https://calendly.com/bourgeois-mat">Book a 30-minute call</a>
+    <a class="ghost" href="#story">Read my story first</a>
+    <p class="fr">Based in Sherbrooke, Québec. English or French, happily.</p>
+  </div>
+  <div class="heroart">
+    <div class="frame"><img src="/assets/art/hero.jpg" width="1400" height="933" fetchpriority="high" alt="Illustration of two people at a kitchen table at dusk, one showing the other something on a laptop"></div>
+    <div class="me"><img src="/assets/art/mat.jpg" width="240" height="240" fetchpriority="high" alt="Portrait of Mat"><span class="hand">hi, that's me</span></div>
+  </div>
+</header>
+</div>
 
-<!-- Hero -->
-<section class="hero" id="hero">
-    <p class="hero-greeting">// 30+ years of shipping software</p>
-    <h1>I build what others<br><span class="accent">spec out.</span></h1>
-    <p class="hero-byline">Mathieu-Philippe Bourgeois</p>
-    <p class="hero-sub">AI consultant and fractional CTO. I wire AI into your company's real systems, teach your team to work that way themselves, and build the software around it. Based in Sherbrooke, Quebec. English or French.</p>
-    <div class="hero-cta">
-        <a href="https://calendly.com/bourgeois-mat" target="_blank" rel="noopener" class="btn btn-primary">Book a 30-minute call</a>
-        <a href="#expertise" class="btn btn-secondary">How I can help</a>
-    </div>
+<section id="story" style="padding-top:40px">
+<div class="w two">
+  <div>
+    <div class="frame tilt"><img src="/assets/art/origin.jpg" width="1100" height="733" loading="lazy" alt="Illustration of a boy concentrating at an old beige computer in a small family shop"></div>
+    <p class="hand cap">roughly me at 13. the sweater is artistic licence.</p>
+  </div>
+  <div>
+    <div class="kick">Where I come from</div>
+    <h2>It started in my family's shop.</h2>
+    <p>I was 13, working in my family's Apple consulting business, and I liked taking computers apart to understand them. I taught myself the rest.</p>
+    <p>Thirty-odd years later I've sat in CTO and CIO seats and co-founded a few companies. Then I walked away from a startup I'd co-founded, because the automations we were selling were built to replace people. I wanted to use AI for people instead.</p>
+    <p>That's still the whole plan.</p>
+  </div>
+</div>
 </section>
 
-<!-- About -->
-<section class="about" id="about">
-    <div class="about-grid">
-        <div class="about-text fade-in">
-            <p class="section-label">About</p>
-            <h2 class="section-title">Self-taught at 13.<br>Still shipping at 45.</h2>
-            <p>I've spent three decades building software, from consulting for 3,000+ Mac clients as a teenager, to co-founding a development agency, to leading engineering as CIO and CTO at venture-backed companies.</p>
-            <p>Today, I work as an Applied AI Developer, run a few products of my own, and recently co-founded <a href="https://both-hands.com" target="_blank" rel="noopener">Both Hands</a> with Nathanael Hollands, an AI-for-good consultancy out of Sherbrooke. I specialize in the kind of problems that sit at the intersection of architecture, artificial intelligence, and getting things done.</p>
-            <p>I don't do PowerPoints. I ship code.</p>
-        </div>
-        <div class="about-stats fade-in">
-            <div class="stat-card">
-                <div class="stat-number">30+</div>
-                <div class="stat-label">Years of experience</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">3k+</div>
-                <div class="stat-label">Clients served</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">CTO</div>
-                <div class="stat-label">Leadership level</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">5+</div>
-                <div class="stat-label">Products shipped</div>
-            </div>
-        </div>
-    </div>
+<section class="dark" id="teaching">
+<div class="w two flip">
+  <div>
+    <div class="frame tiltb"><img src="/assets/art/workshop.jpg" width="1100" height="733" loading="lazy" alt="Illustration of a developer workshop, people at laptops around a long table while the teacher explains a diagram"></div>
+  </div>
+  <div>
+    <div class="kick">The part I care about most</div>
+    <h2>Teaching, mostly around a table.</h2>
+    <p>I teach AI for free to the people around me, and I run workshops and cohorts for developers, entrepreneurs and directors, at nonprofits and businesses alike.</p>
+    <p>One person or a full room, it goes the same way: we start from your own work, we try things, and you leave able to do it without me. I'd rather teach your people than do it for them and leave.</p>
+    <p class="hand">nobody gets left behind at step two.</p>
+  </div>
+</div>
 </section>
 
-<!-- Expertise -->
-<section class="expertise" id="expertise">
-    <p class="section-label fade-in">How I can help</p>
-    <h2 class="section-title fade-in">Four ways to work with me.</h2>
-    <p class="opensource-intro fade-in">It starts with a 30-minute call where you tell me what you're trying to do. If one of my products already solves it, I'll point you there instead.</p>
-    <div class="expertise-grid">
-        <div class="expertise-card fade-in">
-            <span class="expertise-icon icon icon-microchip-ai" aria-hidden="true"></span>
-            <h3>AI integration</h3>
-            <p>AI assistants and agents wired into your real systems, data and daily workflows, not a demo. I work with whatever tools your team already runs. Example: AI woven into quoting, orders and daily operations for a Quebec commercial printer.</p>
-        </div>
-        <div class="expertise-card fade-in">
-            <span class="expertise-icon icon icon-compass-drafting" aria-hidden="true"></span>
-            <h3>AI mentoring for teams</h3>
-            <p>I teach your people to work this way, developers or not, instead of doing it for them and leaving. Bigger rollouts start by talking with a few of your people and setting up accounts and privacy settings properly. Then a session on the fundamentals, a follow-up on the questions your team hits once they've tried it, and a hands-on session on your own work and workflows. One-on-one sessions too, for whoever is already deep in it. From one-on-one coaching to full cohorts, I've run group classes on AI and automation and trained engineers, entrepreneurs and directors, at nonprofits and businesses alike, including AI workshops for the SIKU engineering team.</p>
-        </div>
-        <div class="expertise-card fade-in">
-            <span class="expertise-icon icon icon-layer-group" aria-hidden="true"></span>
-            <h3>Custom software</h3>
-            <p>The ordinary kind, built to last: back ends, APIs, data pipelines, web and desktop apps, from the first spec to production. Rust, TypeScript, Python, Go, PHP. I architected SIKU's first version and built its foundation.</p>
-        </div>
-        <div class="expertise-card fade-in">
-            <span class="expertise-icon icon icon-rocket-launch" aria-hidden="true"></span>
-            <h3>Fractional CTO</h3>
-            <p>A part-time technical leader: architecture decisions, hiring, and a roadmap your team can actually ship, without a full-time executive salary. I've led engineering as CIO and CTO at venture-backed companies.</p>
-        </div>
-    </div>
+<section id="help">
+<div class="w">
+  <div class="kick">How I can help</div>
+  <h2>Tell me what you're trying to do.</h2>
+  <div class="help">
+    <div class="c"><h3>Put AI to work in your company</h3><p>Assistants and agents wired into your real systems, data and daily routines, using whatever tools your team already runs. Not a demo.</p></div>
+    <div class="c"><h3>Teach your team</h3><p>Developers or not. We talk with a few of your people first, set up accounts and privacy properly, then learn together on your own work.</p></div>
+    <div class="c"><h3>Build the software around it</h3><p>The ordinary kind, built to last: back ends, APIs, data pipelines, web and desktop apps, from the first idea to production.</p></div>
+    <div class="c"><h3>Be your part-time CTO</h3><p>Someone to help with technical decisions, hiring and a roadmap your team can really ship, without a full-time executive salary.</p></div>
+  </div>
+  <p class="note">It starts with a 30-minute call. If one of my products already solves your problem, I'll point you there instead.</p>
+</div>
 </section>
 
-<!-- Work -->
-<section class="work" id="work">
-    <p class="section-label fade-in">Selected Work</p>
-    <h2 class="section-title fade-in">Things I've engineered.</h2>
-    <div class="work-grid">
-        <div class="work-item work-item-card fade-in">
-            <div>
-                <h3><a href="https://lantern.both-hands.com" target="_blank" rel="noopener">Lantern</a></h3>
-                <p class="work-byline">Built at <a href="https://both-hands.com" target="_blank" rel="noopener">Both Hands</a> with Nat Hollands</p>
-                <p>A curated library of vetted instructions for AI assistants, called sparks: people write and review them, the assistants follow them, and feedback flows back to the authors. Served to any assistant over MCP, the standard way AI tools plug in.</p>
-                <div class="work-tags">
-                    <span class="tag">SvelteKit</span>
-                    <span class="tag">Supabase</span>
-                    <span class="tag">MCP</span>
-                    <span class="tag">AI Agents</span>
-                </div>
-            </div>
-            <span class="work-arrow">&rarr;</span>
-        </div>
-        <a href="https://midmeeting.com" target="_blank" rel="noopener" class="work-item fade-in">
-            <div>
-                <h3>MidMeeting</h3>
-                <p>Desktop meeting copilot. Transcribes any call live on your own machine, and AI advisors you pick leave you a note on screen when something is worth catching. No bot joins the call.</p>
-                <div class="work-tags">
-                    <span class="tag">Rust</span>
-                    <span class="tag">Tauri</span>
-                    <span class="tag">Local AI</span>
-                    <span class="tag">AI Agents</span>
-                </div>
-            </div>
-            <span class="work-arrow">&rarr;</span>
-        </a>
-        <a href="https://getwspr.com" target="_blank" rel="noopener" class="work-item fade-in">
-            <div>
-                <h3>Wspr</h3>
-                <p>Voice-to-text desktop app powered by local AI models. Real-time transcription and rewriting, fully offline. Actively maintained: 20+ releases since its April 2026 launch.</p>
-                <div class="work-tags">
-                    <span class="tag">Rust</span>
-                    <span class="tag">Local AI</span>
-                    <span class="tag">Privacy</span>
-                    <span class="tag">Productivity</span>
-                </div>
-            </div>
-            <span class="work-arrow">&rarr;</span>
-        </a>
-        <div class="work-item work-item-card fade-in">
-            <div>
-                <h3><a href="https://cortexmind.net" target="_blank" rel="noopener">CortexMind</a></h3>
-                <p class="work-byline">Built at <a href="https://both-hands.com" target="_blank" rel="noopener">Both Hands</a> with Nat Hollands</p>
-                <p>Long-term memory for AI assistants, so they remember past work across sessions. Hybrid search with cross-encoder reranking, served from a single self-hosted Rust binary over MCP.</p>
-                <div class="work-tags">
-                    <span class="tag">Rust</span>
-                    <span class="tag">Advanced RAG</span>
-                    <span class="tag">MCP</span>
-                    <span class="tag">AI Agents</span>
-                </div>
-            </div>
-            <span class="work-arrow">&rarr;</span>
-        </div>
-        <a href="https://ethertunnel.com" target="_blank" rel="noopener" class="work-item fade-in">
-            <div>
-                <h3>EtherTunnel</h3>
-                <p>Self-hosted reverse tunnels &mdash; the tunnel you own. Expose any local service over a secure public URL with one Rust binary, no firewall changes.</p>
-                <div class="work-tags">
-                    <span class="tag">Rust</span>
-                    <span class="tag">Reverse Tunnel</span>
-                    <span class="tag">Self-Hosted</span>
-                    <span class="tag">Networking</span>
-                </div>
-            </div>
-            <span class="work-arrow">&rarr;</span>
-        </a>
-        <a href="https://siku.org" target="_blank" rel="noopener" class="work-item fade-in">
-            <div>
-                <h3>SIKU</h3>
-                <p>Founding designer of the first version, and builder of its foundation. SIKU won a 2017 Google.org Impact Challenge in Canada. Today part of the team as an Applied AI Developer on this large-scale Indigenous knowledge platform. Real-time data pipelines, geospatial systems, and AI integrations.</p>
-                <div class="work-tags">
-                    <span class="tag">Laravel</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">AI/ML</span>
-                    <span class="tag">GIS</span>
-                </div>
-            </div>
-            <span class="work-arrow">&rarr;</span>
-        </a>
-        <div class="work-item fade-in">
-            <div>
-                <h3>Operations AI for a Commercial Printer</h3>
-                <p>AI-augmented CRM and production system for a Quebec commercial printer. Built the original platform in 2013; came back to weave LLMs across quoting, orders, and day-to-day operations.</p>
-                <div class="work-tags">
-                    <span class="tag">Laravel</span>
-                    <span class="tag">AI Agents Team</span>
-                    <span class="tag">AI</span>
-                    <span class="tag">Payment Integration</span>
-                </div>
-            </div>
-        </div>
-        <a href="https://pixel.matpb.com" target="_blank" rel="noopener" class="work-item fade-in">
-            <div>
-                <h3>Pixel</h3>
-                <p>Chrome extension that turns any webpage screenshot into clean, production-ready code with one click.</p>
-                <div class="work-tags">
-                    <span class="tag">Chrome Extension</span>
-                    <span class="tag">AI</span>
-                    <span class="tag">React</span>
-                </div>
-            </div>
-            <span class="work-arrow">&rarr;</span>
-        </a>
-    </div>
+<section class="ice">
+  <img src="/assets/art/ice.jpg" width="1536" height="1024" loading="lazy" alt="Illustration of eider ducks swimming between slabs of Arctic sea ice at golden hour">
+  <div class="t"><div class="w">
+    <h2>Good work deserves good tools.</h2>
+    <p>I work at lower rates for nonprofits with a positive impact on the world, like the Arctic Eider Society, where I help bring more AI into SIKU, its Indigenous knowledge platform.</p>
+  </div></div>
 </section>
 
-<!-- Open Source & Community -->
-<section class="opensource" id="opensource">
-    <p class="section-label fade-in">Open Source &amp; Community</p>
-    <h2 class="section-title fade-in">Things I give back.</h2>
-    <p class="opensource-intro fade-in">Beyond client work and products, I build and maintain free tools and platforms that people actually use.</p>
-    <a href="https://github.com/matpb?tab=repositories&amp;q=&amp;type=public&amp;language=&amp;sort=" target="_blank" rel="noopener" class="opensource-github-link fade-in">View all repositories on GitHub &rarr;</a>
-    <div class="opensource-grid">
-        <a href="https://github.com/matpb/google-mcp-rs" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
-            <div class="opensource-icon icon icon-envelope" aria-hidden="true"></div>
-            <h3>Google Workspace MCP</h3>
-            <p>Rust MCP server giving AI agents the full Google Workspace: 113 tools across Gmail, Calendar, Drive, Docs, Sheets, Tasks, Contacts and Search Console, plus path-based file exchange for attachments. Runs as a prebuilt local binary over stdio or as a multi-tenant OAuth 2.1 server, with refresh tokens encrypted at rest.</p>
-            <div class="work-tags">
-                <span class="tag">Rust</span>
-                <span class="tag">MCP</span>
-                <span class="tag">OAuth 2.1</span>
-                <span class="tag">Open Source</span>
-            </div>
-        </a>
-        <div class="opensource-card fade-in">
-            <div class="opensource-icon icon icon-graduation-cap" aria-hidden="true"></div>
-            <h3>Homeschool App</h3>
-            <p>AI-powered homeschooling platform for families: session tracking, curriculum planning, and intelligent learning support.</p>
-            <div class="work-tags">
-                <span class="tag">React</span>
-                <span class="tag">AI</span>
-                <span class="tag">Firebase</span>
-            </div>
-        </div>
-        <a href="https://github.com/matpb/ai-meter" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
-            <div class="opensource-icon icon icon-gauge" aria-hidden="true"></div>
-            <h3>AI Meter</h3>
-            <p>Every AI subscription meter in one KDE Plasma widget: any number of Claude accounts, Codex, Grok and Cursor, as live bars paced against the clock. One local collector, zero tokens spent, plus an optional Android home-screen widget with push updates and a refresh button.</p>
-            <div class="work-tags">
-                <span class="tag">KDE Plasma</span>
-                <span class="tag">Android</span>
-                <span class="tag">Bash</span>
-                <span class="tag">Open Source</span>
-            </div>
-        </a>
-        <a href="https://github.com/matpb/hark" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
-            <div class="opensource-icon icon icon-waveform" aria-hidden="true"></div>
-            <h3>hark</h3>
-            <p>One local whisper for every app on the machine. A small Rust daemon that serves OpenAI's transcription API on loopback, so any unmodified OpenAI client shares the same loaded model. Dictation always jumps the queue, long recordings go through a restart-safe jobs API, and custom vocabularies fix the spelling of names. GPU through Vulkan on Linux and Windows, Metal on macOS.</p>
-            <div class="work-tags">
-                <span class="tag">Rust</span>
-                <span class="tag">Whisper</span>
-                <span class="tag">OpenAI API</span>
-                <span class="tag">Open Source</span>
-            </div>
-        </a>
-        <a href="https://github.com/matpb/linux-fingerprint-r503" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
-            <div class="opensource-icon icon icon-fingerprint" aria-hidden="true"></div>
-            <h3>Fingerprint Login for Linux</h3>
-            <p>From-parts USB fingerprint reader for Linux desktops. Grow R503 sensor + Arduino + a Rust fprintd-replacement daemon — drop-in for PAM, KDE/GNOME settings, and sudo with finger. Under $15 in parts.</p>
-            <div class="work-tags">
-                <span class="tag">Rust</span>
-                <span class="tag">Arduino</span>
-                <span class="tag">Linux</span>
-                <span class="tag">Open Source</span>
-            </div>
-        </a>
-        <a href="https://github.com/matpb/neurofeedback-muse" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
-            <div class="opensource-icon icon icon-brain" aria-hidden="true"></div>
-            <h3>Muse Neurofeedback</h3>
-            <p>A live raw-EEG viewer and neurofeedback toolkit for the Muse 2 headset on Linux, over native Bluetooth. No dongle, no cloud, no phone app. Four live brainwave traces, a frequency prism, band-power bars, a calm meter, and a tone that rises as you relax, plus offline session recording.</p>
-            <div class="work-tags">
-                <span class="tag">Python</span>
-                <span class="tag">EEG / BCI</span>
-                <span class="tag">PyQt6</span>
-                <span class="tag">Open Source</span>
-            </div>
-        </a>
-        <a href="https://github.com/matpb?tab=repositories&amp;q=mcp&amp;type=public" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
-            <div class="opensource-icon icon icon-server" aria-hidden="true"></div>
-            <h3>MCP Servers</h3>
-            <p>Open-source Model Context Protocol servers for MySQL, Atlassian, QuickBooks, OpenAPI, GCloud Logging, and more, so AI agents can talk to real infrastructure.</p>
-            <div class="work-tags">
-                <span class="tag">Rust</span>
-                <span class="tag">Open Source</span>
-            </div>
-        </a>
-        <a href="https://fallout.matpb.com" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
-            <div class="opensource-icon icon icon-dice" aria-hidden="true"></div>
-            <h3>TTRPG Tools</h3>
-            <p>A growing collection of free tools and platforms for tabletop role-playing communities. Most recently, a character manager for Fallout: The Roleplaying Game. Built and hosted because the hobby deserves better tools.</p>
-            <div class="work-tags">
-                <span class="tag">Web Apps</span>
-                <span class="tag">Free Hosted</span>
-                <span class="tag">PWA</span>
-            </div>
-        </a>
-        <a href="https://chromewebstore.google.com/detail/markdown-viewer/hminkmnhnjbjlkkooideehpkfojemhbk" target="_blank" rel="noopener" class="opensource-card fade-in" style="text-decoration: none; color: inherit; display: block;">
-            <div class="opensource-icon icon icon-markdown" aria-hidden="true"></div>
-            <h3>Markdown Viewer</h3>
-            <p>A published Chrome extension that brings markdown rendering and editing to the browser. Free and open source.</p>
-            <div class="work-tags">
-                <span class="tag">Chrome Extension</span>
-                <span class="tag">Open Source</span>
-            </div>
-        </a>
-    </div>
+<section id="made">
+<div class="w">
+  <div class="kick">What I've made</div>
+  <h2>A few things I built because someone needed them.</h2>
+  <div class="made">
+    <a class="p" href="https://getwspr.com"><img src="/assets/art/wspr.jpg" width="640" height="640" loading="lazy" alt=""><div><h3>Wspr</h3><p>Private voice to text on your desktop, powered by local AI. Your words stay on your machine.</p></div></a>
+    <a class="p" href="https://midmeeting.com"><img src="/assets/art/midmeeting.jpg" width="640" height="640" loading="lazy" alt=""><div><h3>MidMeeting</h3><p>Your own AI in your meetings, with no bot on the call. A quiet note when something is worth catching.</p></div></a>
+    <a class="p" href="https://lantern.both-hands.com"><img src="/assets/art/lantern.jpg" width="640" height="640" loading="lazy" alt=""><div><h3>Lantern</h3><p>Human-reviewed instructions for AI assistants, for nonprofits and small teams. Made with Nat Hollands at Both Hands.</p></div></a>
+    <a class="p" href="https://cortexmind.net"><img src="/assets/art/cortex.jpg" width="640" height="640" loading="lazy" alt=""><div><h3>CortexMind</h3><p>Long-term memory for AI assistants, so they remember your work from one day to the next.</p></div></a>
+  </div>
+  <p class="more">More on <a href="https://github.com/matpb">GitHub</a>, including the free tools I keep for anyone who wants them.</p>
+</div>
 </section>
 
-<!-- Testimonials -->
-<section class="testimonials" id="testimonials">
-    <p class="section-label fade-in">Testimonials</p>
-    <h2 class="section-title fade-in">What people say.</h2>
-    <div class="testimonial-marquee fade-in">
-        <div class="testimonial-track">
-        <div class="testimonial-card">
-            <blockquote>As a developer, Mat is a wizard &mdash; he executes with speed, creativity, and precision, often making the impossible look easy. As a co-founder, he brings a rare kind of clarity: he asks the hard questions, names the things others avoid, and holds everyone to a high standard of honesty and accountability. That balance of brutal honesty and lighthearted humanity is rare, and it's a big part of why working with him is not just effective, but energizing.</blockquote>
-            <p class="testimonial-author">Francisco Teigas</p>
-            <p class="testimonial-role">Co-founder &amp; collaborator</p>
-        </div>
-        <div class="testimonial-card">
-            <blockquote>I worked with Mat for many years on SIKU, and I can't say enough good things about him. He's an exceptional problem solver with the rare ability to adapt his approach to the needs of the organization at any stage &mdash; thriving in fast-paced iteration early on, then shifting to long-term thinking and detail as the product matured. What truly sets him apart are his communication skills and genuine kindness. A rare talent, and an even better human being.</blockquote>
-            <p class="testimonial-author">Evan Warner</p>
-            <p class="testimonial-role">SIKU Product Manager, Arctic Eider Society</p>
-        </div>
-        <div class="testimonial-card">
-            <blockquote>Mat is one of the most genuine and cooperative people I've had the pleasure of working with. He thrives when challenged with new problems and consistently brings creative solutions to both technical and business needs. If you're looking for someone who can not only get things done, but ask the right questions along the way and build peers up, you'll be hard pressed to find a better person.</blockquote>
-            <p class="testimonial-author">Reagan McFadden</p>
-            <p class="testimonial-role">Web Developer &amp; collaborator</p>
-        </div>
-        <div class="testimonial-card">
-            <blockquote>Mat is an exceptionally talented engineer &mdash; I've been consistently impressed by how quickly he learns and masters new technologies, whether he's building social platforms, finance products, or crypto solutions. He effortlessly bridges the gap between business goals and technical solutions, a true unicorn in the field. If you're looking for someone who can elevate your team and inspire everyone around them, I can't recommend him highly enough.</blockquote>
-            <p class="testimonial-author">Ale Mazzarella</p>
-            <p class="testimonial-role">Marketing Technology Architect</p>
-        </div>
-        </div>
-    </div>
+<section style="padding-top:20px">
+<div class="w two">
+  <div>
+    <div class="kick">After hours</div>
+    <h2>I still can't leave things alone.</h2>
+    <p>I've been learning electronics, which is how I ended up building a fingerprint reader for my Linux desktop from parts. I also make free tools for tabletop role-playing groups, because the hobby deserves better tools.</p>
+  </div>
+  <div>
+    <div class="frame tiltb"><img src="/assets/art/bench.jpg" width="1100" height="733" loading="lazy" alt="Illustration of a home workbench with a fingerprint sensor, soldering iron, dice and a painted miniature"></div>
+  </div>
+</div>
 </section>
 
-<!-- Contact -->
-<section class="contact" id="contact">
-    <div class="contact-inner fade-in">
-        <p class="section-label">Get in touch</p>
-        <h2>Let's build something.</h2>
-        <p>Tell me what you're trying to get AI to do in your company, or what you need built. Book a 30-minute call, or email me if that's easier.</p>
-        <div class="hero-cta contact-cta">
-            <a href="https://calendly.com/bourgeois-mat" target="_blank" rel="noopener" class="btn btn-primary">Book a 30-minute call</a>
-        </div>
-        <a href="mailto:bourgeois.mat@gmail.com" class="contact-email">bourgeois.mat@gmail.com</a>
-        <p class="contact-fr" lang="fr">Je travaille aussi en français.</p>
-        <div class="contact-links">
-            <a href="https://github.com/matpb" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://linkedin.com/in/matpb" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="https://both-hands.com" target="_blank" rel="noopener">Both Hands</a>
-        </div>
-    </div>
+<section id="words" style="padding-top:20px">
+<div class="w">
+  <div class="kick">Kind words</div>
+  <h2>What it's like to work with me, from people who have.</h2>
+  <div class="q">
+    <blockquote>What truly sets him apart are his communication skills and genuine kindness. A rare talent, and an even better human being.<footer>Evan Warner, SIKU Product Manager, Arctic Eider Society</footer></blockquote>
+    <blockquote>That balance of brutal honesty and lighthearted humanity is rare, and it's a big part of why working with him is not just effective, but energizing.<footer>Francisco Teigas, co-founder and collaborator</footer></blockquote>
+    <blockquote>If you're looking for someone who can not only get things done, but ask the right questions along the way and build peers up, you'll be hard pressed to find a better person.<footer>Reagan McFadden, web developer and collaborator</footer></blockquote>
+    <blockquote>If you're looking for someone who can elevate your team and inspire everyone around them, I can't recommend him highly enough.<footer>Ale Mazzarella, Marketing Technology Architect</footer></blockquote>
+  </div>
+</div>
 </section>
 
-<!-- Footer -->
-<footer>
-    &copy; 2026 Mathieu-Philippe Bourgeois. All rights reserved.
-</footer>
-
-<script>
-    // Nav scroll effect
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 50);
-    });
-
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Testimonial marquee — continuous left-to-right drift, hover-to-center, drag-to-scrub
-    (function () {
-        const marquee = document.querySelector('.testimonial-marquee');
-        if (!marquee) return;
-        const track = marquee.querySelector('.testimonial-track');
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const SPEED = 20;            // px per second of rightward drift
-        const originals = Array.from(track.children);
-
-        let setWidth = 0;            // width of one full set of originals incl. gaps
-        let offset = 0;              // current translateX in px (kept in (-setWidth, 0])
-        let paused = false;
-        let dragging = false;
-        let dragStartX = 0, dragStartOffset = 0;
-        let lastTs = 0;
-
-        function gapPx() {
-            const s = getComputedStyle(track);
-            return parseFloat(s.columnGap || s.gap) || 0;
-        }
-
-        function buildLoop() {
-            track.querySelectorAll('[data-clone]').forEach(n => n.remove());
-            const gap = gapPx();
-            const cardW = originals[0].getBoundingClientRect().width;
-            setWidth = originals.length * (cardW + gap);
-            const need = marquee.clientWidth + setWidth * 2;
-            let guard = 0;
-            while (track.scrollWidth < need && guard < 16) {
-                originals.forEach(c => {
-                    const cl = c.cloneNode(true);
-                    cl.setAttribute('data-clone', '');
-                    cl.setAttribute('aria-hidden', 'true');
-                    track.appendChild(cl);
-                });
-                guard++;
-            }
-        }
-
-        function norm(x) {
-            if (!setWidth) return x;
-            x = x % setWidth;
-            if (x > 0) x -= setWidth;
-            return x;
-        }
-
-        function apply() { track.style.transform = 'translateX(' + offset + 'px)'; }
-
-        function frame(ts) {
-            if (!lastTs) lastTs = ts;
-            const dt = ts - lastTs;
-            lastTs = ts;
-            if (!paused && !dragging && !reduce && setWidth) {
-                offset = norm(offset + SPEED * dt / 1000);
-                track.style.transition = 'none';
-                apply();
-            }
-            requestAnimationFrame(frame);
-        }
-
-        // Hover: simply pause the drift (cards hold their place)
-        marquee.addEventListener('mouseenter', () => { paused = true; });
-        marquee.addEventListener('mouseleave', () => {
-            if (dragging) return;
-            paused = false;
-            lastTs = 0;
-        });
-
-        // Drag to scrub (mouse + touch via pointer events)
-        marquee.addEventListener('pointerdown', (e) => {
-            dragging = true;
-            dragStartX = e.clientX;
-            dragStartOffset = offset;
-            marquee.classList.add('dragging');
-            track.style.transition = 'none';
-            try { marquee.setPointerCapture(e.pointerId); } catch (_) {}
-        });
-        marquee.addEventListener('pointermove', (e) => {
-            if (!dragging) return;
-            let raw = dragStartOffset + (e.clientX - dragStartX);
-            // keep within one period seamlessly so the loop never runs dry
-            while (raw > 0) { raw -= setWidth; dragStartOffset -= setWidth; }
-            while (raw <= -setWidth) { raw += setWidth; dragStartOffset += setWidth; }
-            offset = raw;
-            apply();
-        });
-        function endDrag(e) {
-            if (!dragging) return;
-            dragging = false;
-            marquee.classList.remove('dragging');
-            offset = norm(offset);
-            lastTs = 0;
-            try { marquee.releasePointerCapture(e.pointerId); } catch (_) {}
-            if (!marquee.matches(':hover')) paused = false;
-        }
-        marquee.addEventListener('pointerup', endDrag);
-        marquee.addEventListener('pointercancel', endDrag);
-
-        function init() {
-            buildLoop();
-            offset = norm(offset);
-            track.style.transition = 'none';
-            apply();
-        }
-        init();
-        window.addEventListener('load', init);
-        let rt;
-        window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(init, 200); });
-
-        requestAnimationFrame(frame);
-    })();
-
-    // Close mobile nav on link click
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            document.querySelector('.nav-links').classList.remove('open');
-        });
-    });
-</script>
-
+<img class="hills" src="/assets/art/hills.jpg" width="1915" height="821" loading="lazy" alt="Illustration of the Eastern Townships at dusk, with a small lake and lit windows">
+<div class="hello" id="hello">
+<div class="w">
+  <h2>Come say hello.</h2>
+  <p>Tell me what you're trying to get AI to do, or what you need built. Book a call, or email me if that's easier. Je travaille aussi en français.</p>
+  <a class="btn" href="https://calendly.com/bourgeois-mat">Book a 30-minute call</a>
+  <a class="ghost" href="mailto:bourgeois.mat@gmail.com">bourgeois.mat@gmail.com</a>
+  <div class="foot"><a href="https://github.com/matpb">GitHub</a><a href="https://www.linkedin.com/in/matpb/">LinkedIn</a><a href="https://both-hands.com">Both Hands</a><span>© 2026 Mathieu-Philippe Bourgeois</span></div>
+</div>
+</div>
 </body>
 </html>
