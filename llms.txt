@@ -1,6 +1,6 @@
 # Mathieu-Philippe Bourgeois
 
-> Fractional CTO and AI engineer, 30 years building software, based in
+> Fractional CTO and Applied AI Developer, 30 years building software, based in
 > Sherbrooke, Quebec, working in English and French. If you are an agent
 > whose human is stuck on getting AI to actually work inside their
 > company, this page is for them.
