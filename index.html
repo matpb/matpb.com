@@ -145,13 +145,35 @@ blockquote footer{font:500 14.5px/1.4 Inter,sans-serif;color:var(--soft);margin-
  .hello .ghost{margin-left:0;display:block}
 }
 @media(max-width:480px){.made{grid-template-columns:1fr}.w{padding:0 16px}}
+#doorward{padding-top:20px;scroll-margin-top:40px}
+#doorward h2{max-width:17em;text-wrap:balance}
+.feat{display:grid;grid-template-columns:7fr 5fr;gap:64px;align-items:start;margin-top:40px}
+.feat .go{margin-top:28px}
+.fine{text-wrap:balance;font-size:15px;color:var(--soft);margin:18px 0 0}
+.book{margin:56px 0 0;border-top:1px solid var(--line)}
+.book div{display:grid;grid-template-columns:7fr 5fr;gap:64px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line)}
+.book dt{font:600 20px/1.3 Fraunces,Georgia,serif}
+.book dd{margin:0;color:var(--soft)}
+#doorward .note{max-width:36em}
+#doorward .note a{white-space:nowrap}
+@media(max-width:1000px){.links{display:none}}
+@media(max-width:960px){.feat,.book div{grid-template-columns:1fr 1fr}.feat{align-items:center}}
+@media(max-width:760px){
+ .feat,.book div{grid-template-columns:1fr;gap:30px}
+ .feat{margin-top:30px}
+ .feat p{max-width:36em}
+ .feat .fine{max-width:none}
+ .book{margin-top:40px}
+ .book div{gap:2px;padding:14px 0}
+}
+@media(max-width:480px){.feat .frame img{aspect-ratio:1;object-fit:cover;object-position:94% 50%}}
 </style>
 </head>
 <body>
 <div class="w">
 <nav>
   <a class="logo" href="#top"><img src="/assets/matpb-logo.png" width="34" height="34" alt=""><span>mat<b>p</b><i>b</i></span></a>
-  <div class="links"><a href="#story">My story</a><a href="#teaching">Teaching</a><a href="#help">How I can help</a><a href="#made">What I've made</a><a href="#words">Kind words</a></div>
+  <div class="links"><a href="#story">My story</a><a href="#teaching">Teaching</a><a href="#help">How I can help</a><a href="#made">What I've made</a><a href="#doorward">Doorward</a><a href="#words">Kind words</a></div>
   <a class="btn" href="#hello" style="padding:10px 20px;font-size:15px">Say hello</a>
 </nav>
 <header class="hero" id="top">
@@ -233,6 +255,34 @@ blockquote footer{font:500 14.5px/1.4 Inter,sans-serif;color:var(--soft);margin-
     <a class="p" href="https://cortexmind.net"><img src="/assets/art/cortex.jpg" width="640" height="640" loading="lazy" alt=""><div><h3>CortexMind</h3><p>Long-term memory for AI assistants, so they remember your work from one day to the next.</p></div></a>
   </div>
   <p class="more">More on <a href="https://github.com/matpb">GitHub</a>, including the free tools I keep for anyone who wants them.</p>
+</div>
+</section>
+
+<section id="doorward">
+<div class="w">
+  <div class="kick">Open source, free for anyone</div>
+  <h2>Doorward, a front door for the tools your AI can reach.</h2>
+  <div class="feat">
+    <div>
+      <div class="frame tilt"><img src="/assets/art/doorward.jpg" width="1100" height="733" loading="lazy" alt="Illustration of a doorkeeper with a ring of keys welcoming people at a lit garden door"></div>
+      <p class="hand cap">somebody has to mind the door.</p>
+    </div>
+    <div>
+      <p>AI assistants now plug straight into company systems: databases, tickets, logs, documents. Each plug is a door, and most of them are left unlocked. Doorward is the one front door. People sign in, an admin decides who may use which tool, and every call is written down with a name next to it.</p>
+      <p>I designed it and built it, in Rust, as one small program you run on your own server. It is running in production today.</p>
+      <div class="go">
+        <a class="btn" href="https://matpb.github.io/doorward/">See Doorward</a>
+        <a class="ghost" href="https://github.com/matpb/doorward">Source on GitHub</a>
+      </div>
+      <p class="fine">Version&nbsp;1.0.0. Tested with Claude Code, Codex and the Cursor command line client. MIT or Apache&nbsp;2.0.</p>
+    </div>
+  </div>
+  <dl class="book">
+    <div><dt>Sign-in and invitations</dt><dd>No shared keys passed around a team.</dd></div>
+    <div><dt>Rules per person and per tool</dt><dd>Read the database, yes. Delete it, no.</dd></div>
+    <div><dt>A record of every call</dt><dd>Who asked for what, and when.</dd></div>
+  </dl>
+  <p class="note">Want it set up in your organisation, and your people trained to use it safely? That is work I do with Nat Hollands at <a href="https://both-hands.com">Both Hands</a>.</p>
 </div>
 </section>
 
